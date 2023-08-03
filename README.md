@@ -1,15 +1,6 @@
 Tool made to test syncronization mechanisms in a deterministic way that does not rely on OS scheduler.
 Tests should be deterministic and reproducible.
 
-1. Generate ninja build files
-   ```sh
-   cmake . -B build -G Ninja
-   ```
-2. Build
-   ```sh
-   cmake --build build
-   ```
-
 
 <a name="readme-top"></a>
 
@@ -19,9 +10,6 @@ Tests should be deterministic and reproducible.
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
 <h3 align="center">Deterministic Concurrency</h3>
 
@@ -59,7 +47,7 @@ Tests should be deterministic and reproducible.
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Concurrency testing often poses challenges due to the non-deterministic nature of threads and synchronization mechanisms. The DeterministicConcurrency library aims to address these challenges by providing a tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.
+Concurrency testing often poses challenges due to the non-deterministic nature of threads and synchronization mechanisms. The DeterministicConcurrency library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -75,18 +63,17 @@ I build and tested this lib with C++20 but it should be usable for C++17 or more
 
 ### Installation
 
-this is an header only library but you can build the main.cpp which contains a simple test using:
+This is an header only library but you can build the main.cpp which contains a simple test using:
 
-1. Generate ninja build files
    ```sh
    cmake . -B build -G Ninja
    ```
-2. Build
+
    ```sh
    cmake --build build
    ```
 
-You can also built the tests with:
+You can also generate the build files to build the tests with:
    ```sh
    cmake . -B build -DDC_COMPILE_TESTS=ON -G Ninja
    ```
@@ -112,7 +99,7 @@ TODO
 <!-- LICENSE -->
 ## License
 
-TODO
+Distributed under the MIT License. See LICENSE.txt for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
