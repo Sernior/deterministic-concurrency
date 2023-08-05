@@ -48,6 +48,7 @@ Tests should be deterministic and reproducible.
 ## About The Project
 
 Concurrency testing often poses challenges due to the non-deterministic nature of threads and synchronization mechanisms. The DeterministicConcurrency library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.
+While primarily designed for testing, the User-Controlled Scheduler can also serve as a framework to create synchronized thread pool-like structures for broader multithread applications.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -55,18 +56,10 @@ Concurrency testing often poses challenges due to the non-deterministic nature o
 <!-- GETTING STARTED -->
 ## Getting Started
 
-TODO
-
-### Prerequisites
-
-I build and tested this lib with C++20 but it should be usable for C++17 or more.
-
-### Installation
-
 This is an header only library but you can build the main.cpp which contains a simple test using:
 
    ```sh
-   cmake . -B build -G Ninja
+   cmake . -B build -DDC_COMPILE_MAIN=ON -G Ninja
    ```
 
    ```sh
@@ -79,6 +72,31 @@ You can also generate the build files to build the tests with:
    ```
 
 
+### Prerequisites
+
+I build and tested this lib with C++17.
+If for some reason on some compilers it doesn`t work on C++17+ please email me.
+
+### Installation
+
+Using cmake you can include this lib using:
+```
+include(FetchContent)
+
+FetchContent_Declare(
+  dc
+  GIT_REPOSITORY https://github.com/Sernior/deterministic-concurrency.git
+  GIT_TAG v1.0.0
+)
+
+FetchContent_MakeAvailable(dc)
+```
+
+At this point you should be able to link the library simply using:
+```
+target_link_libraries(your_stuff.cpp deterministic_concurrency)
+```
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -90,7 +108,7 @@ TODO
 <!-- CONTRIBUTING -->
 ## Contributing
 
-TODO
+If you have problems or want to request a feature feel free to open an issue or contact me (federignoli@hotmail.it).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

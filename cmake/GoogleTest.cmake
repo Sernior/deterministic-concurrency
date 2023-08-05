@@ -1,9 +1,7 @@
 set(CMAKE_BUILD_TYPE Release)
 
-# Add FetchContent module (introduced in CMake 3.11)
 include(FetchContent)
 
-# Configure and download Google Test
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
