@@ -13,6 +13,9 @@ namespace DeterministicConcurrency{
 
         public:
 
+        /*
+        Construct a UserControlledScheduler controlling N threads
+        */
         template <typename... Tuples>
         UserControlledScheduler(Tuples&&... tuples)
             : UserControlledScheduler{std::index_sequence_for<Tuples...>{},
@@ -20,7 +23,7 @@ namespace DeterministicConcurrency{
 
 
         /*
-        Will switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back or tock()
+        Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back or tock()
         */
         template<typename... Args>
         void switchContextTo(Args&&... threadIndixes){
@@ -28,34 +31,52 @@ namespace DeterministicConcurrency{
             wait(static_cast<decltype(threadIndixes)>(threadIndixes)...);
         }
 
+        /*
+        Wait until the threads with threadIndixes tock()
+        */
         template<typename... Args>
         void wait(Args&&... threadIndixes){
             static_assert(sizeof...(threadIndixes) <= N, "Too many args");
             (_threads[threadIndixes].wait_for_tock(), ...);
         }
 
+        /*
+        Wait until all threads tock()
+        */
         void waitAll(){
             for (auto& _thread : _threads)
                 _thread.wait_for_tock();
         }
 
+        /*
+        Tick threadIndixes threads, allowing them to continue if they were waiting for tick()
+        */
         template<typename... Args>
         void tick(Args&&... threadIndixes){
             static_assert(sizeof...(threadIndixes) <= N, "Too many args");
             (_threads[threadIndixes].tick(), ...);
         }
 
+        /*
+        Tick all threads, allowing them to continue if they were waiting for tick()
+        */
         void tickAll(){
             for (auto& _thread : _threads)
                 _thread.tick();
         }
 
+        /*
+        Performa a join on the threads with threadIndixes
+        */
         template<typename... Args>
         void joinOn(Args&&... threadIndixes){
             static_assert(sizeof...(threadIndixes) <= N, "Too many args");
             (_threads[threadIndixes].join(), ...);
         }
 
+        /*
+        Performa a join on all threads
+        */
         void joinAll(){
             for (auto& _thread : _threads)
                 _thread.join();

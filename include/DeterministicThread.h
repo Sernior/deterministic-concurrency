@@ -13,7 +13,7 @@ namespace DeterministicConcurrency{
         thread_context() noexcept : mutex_(), tick_tock(), tick_tock_v(tick_tock_t::TOCK) {}
 
         /*
-        will allow the scheduler to proceed its execution
+        Allow the scheduler to proceed its execution
         */
         void tock() {
             {
@@ -24,7 +24,7 @@ namespace DeterministicConcurrency{
         }
 
         /*
-        will wait until the scheduler notify this thread
+        Wait until the scheduler notify this thread
         */
         void wait_for_tick(){
             std::unique_lock<std::mutex> lock(mutex_);
@@ -33,7 +33,7 @@ namespace DeterministicConcurrency{
         }
 
         /*
-        will notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
+        Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
         */
         void switchContext(){
             tock();
@@ -49,14 +49,14 @@ namespace DeterministicConcurrency{
     public:
         template <typename Func, typename... Args>
         explicit DeterministicThread(thread_context* t ,Func&& func, Args&&... args)
-            : thread_(std::forward<Func>(func), t, std::forward<Args>(args)...), _this_thread(t) {}
+            : _thread(std::forward<Func>(func), t, std::forward<Args>(args)...), _this_thread(t) {}
 
         void join() {
-            thread_.join();
+            _thread.join();
         }
 
         /*
-        will allow the thread to proceed its execution
+        Allow the thread to proceed its execution
         */
         void tick() {
             {
@@ -67,7 +67,7 @@ namespace DeterministicConcurrency{
         }
 
         /*
-        will wait until the thread notify the scheduler
+        Wait until the thread notify the scheduler
         */
         void wait_for_tock(){
             std::unique_lock<std::mutex> lock(_this_thread->mutex_);
@@ -77,6 +77,6 @@ namespace DeterministicConcurrency{
 
     private:
         thread_context* _this_thread;
-        std::thread thread_;
+        std::thread _thread;
     };
 }

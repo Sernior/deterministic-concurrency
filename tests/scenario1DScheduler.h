@@ -1,4 +1,4 @@
-#include <DeterministicThread.h>
+#include <UserControlledScheduler.h>
 #include <vector>
 
 namespace scenario1DS{

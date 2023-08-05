@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
         scenario1DS::sch.switchContextTo(i);
     }
 
-    scenario1DS::sch.joinAll();
+    scenario1DS::sch.joinAll();// end first Test Act
 
     //second Test Act (UserCtrlScheduler2ParallelismTest)
 
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
     scenario2DS::sch.switchContextTo(1,3);
     scenario2DS::sch.switchContextTo(0,2);
 
-    scenario2DS::sch.joinAll();
+    scenario2DS::sch.joinAll();// end second Test Act
 
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
