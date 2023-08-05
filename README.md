@@ -121,7 +121,7 @@ This defines a scheduler which control 2 threads.<br />
 The elements in the tuple after &f and &h are the arguments that will be passed to **`f`** and **`h`**.<br />
 These threads will execute **`f`** and **`h`**.<br />
 **`f`** will immediately **`wait_for_tick`** and same for **`h`**.<br />
-What threads are within the **`UserControlledScheduler`** is elements in a std::array so you can think their indexes are their threadIDs.<br />
+What threads are within the **`UserControlledScheduler`** is elements in a std::array; you can think their indexes as their threadIDs.<br />
 For instance in this context you can do:
 ```
 sch.switchContextTo(1);
