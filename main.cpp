@@ -1,6 +1,5 @@
 #include <iostream>
-#include <DeterministicThread.h>
-#include <UserControlledScheduler.h>
+#include <DeterministicConcurrency>
 #include <tuple>
  
 void f(DeterministicConcurrency::thread_context* c ,int a, int b){

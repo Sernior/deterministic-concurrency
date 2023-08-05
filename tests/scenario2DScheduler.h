@@ -1,4 +1,4 @@
-#include <DeterministicThread.h>
+#include <DeterministicConcurrency>
 #include <vector>
 
 namespace scenario2DS{

@@ -6,8 +6,6 @@ Tests should be deterministic and reproducible.
 
 
 
-
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
 
@@ -19,8 +17,6 @@ Tests should be deterministic and reproducible.
 </div>
 
 
-
-<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -42,9 +38,6 @@ Tests should be deterministic and reproducible.
   </ol>
 </details>
 
-
-
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 Concurrency testing often poses challenges due to the non-deterministic nature of threads and synchronization mechanisms. The DeterministicConcurrency library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.<br />
@@ -52,8 +45,6 @@ While primarily designed for testing, the User-Controlled Scheduler can also ser
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 This is an header only library but you can build the main.cpp which contains a simple test using:
@@ -75,7 +66,7 @@ You can also generate the build files to build the tests with:
 ### Prerequisites
 
 I build and tested this lib with C++17.
-If for some reason on some compilers it doesn`t work on C++17+ please email me.
+If for some reason, on some compilers, it doesn`t work on C++17+ please email me or open an issue.
 
 ### Installation
 
@@ -97,24 +88,59 @@ At this point you should be able to link the library simply using:
 target_link_libraries(your_stuff.cpp deterministic_concurrency)
 ```
 
-<!-- USAGE EXAMPLES -->
 ## Usage
 
-TODO
+Include the library:
+```
+#include <DeterministicConcurrency>
+```
+Define the functions you want the threads to execute:
+```
+void f(DeterministicConcurrency::thread_context* c ,int a, int b){
+    c->wait_for_tick();
+    std::cout << a;
+    c->switchContext();
+    std::cout << b;
+    c->tock();
+}
+
+void h(DeterministicConcurrency::thread_context* c ,int a, int b){
+    c->wait_for_tick();
+    std::cout << b;
+    c->switchContext();
+    std::cout << a;
+    c->tock();
+}
+```
+The first parameter must always be a pointer to DeterministicConcurrency::thread_context.<br /><br />
+Now define your user controlled scheduler:
+```
+DeterministicConcurrency::UserControlledScheduler<2> sch{std::tuple{&f, 0, 1}, std::tuple{&h, 3, 2}};
+```
+This defines a scheduler which control 2 threads.<br />
+The elements in the tuple after &f and &h are the arguments that will be passed to **`f`** and **`h`**.<br />
+These threads will execute **`f`** and **`h`**.<br />
+**`f`** will immediately **`wait_for_tick`** and same for **`h`**.<br />
+What threads are within the **`UserControlledScheduler`** is elements in a std::array so you can think their indexes are their threadIDs.<br />
+For instance in this context you can do:
+```
+sch.switchContextTo(1);
+sch.switchContextTo(0);
+sch.switchContextTo(0);
+sch.switchContextTo(1);
+```
+And you will end up printing "2013".
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
-If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it. Contributions are also welcome!<br />Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
+If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br />Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See LICENSE.txt for more information.
@@ -122,8 +148,6 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- CONTACT -->
 ## Contact
 
 Federico Abrignani - federignoli@hotmail.it
@@ -131,8 +155,6 @@ Federico Abrignani - federignoli@hotmail.it
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- ACKNOWLEDGMENTS -->
 ## Authors
 
 * Federico Abrignani (Author)

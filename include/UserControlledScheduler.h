@@ -1,5 +1,5 @@
 #pragma once
-#include <DeterministicThread.h>
+#include <DeterministicConcurrency>
 #include <cstddef>
 #include <Array>
 #include <tuple>

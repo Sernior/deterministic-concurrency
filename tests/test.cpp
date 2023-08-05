@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
-#include <UserControlledScheduler.h>
+//#include <UserControlledScheduler.h>
+#include <DeterministicConcurrency>
 #include "scenario1DScheduler.h"
 #include "scenario2DScheduler.h"
 
