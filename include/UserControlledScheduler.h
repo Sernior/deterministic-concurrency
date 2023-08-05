@@ -24,8 +24,8 @@ namespace DeterministicConcurrency{
         */
         template<typename... Args>
         void switchContextTo(Args&&... threadIndixes){
-            tick(std::forward<Args>(threadIndixes)...);
-            wait(std::forward<Args>(threadIndixes)...);
+            tick(static_cast<decltype(threadIndixes)>(threadIndixes)...);
+            wait(static_cast<decltype(threadIndixes)>(threadIndixes)...);
         }
 
         template<typename... Args>
