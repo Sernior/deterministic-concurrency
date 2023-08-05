@@ -47,7 +47,7 @@ Tests should be deterministic and reproducible.
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Concurrency testing often poses challenges due to the non-deterministic nature of threads and synchronization mechanisms. The DeterministicConcurrency library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.
+Concurrency testing often poses challenges due to the non-deterministic nature of threads and synchronization mechanisms. The DeterministicConcurrency library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.<br />
 While primarily designed for testing, the User-Controlled Scheduler can also serve as a framework to create synchronized thread pool-like structures for broader multithread applications.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -108,7 +108,7 @@ TODO
 <!-- CONTRIBUTING -->
 ## Contributing
 
-If you have problems or want to request a feature feel free to open an issue or contact me (federignoli@hotmail.it).
+If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it. Contributions are also welcome!<br />Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
