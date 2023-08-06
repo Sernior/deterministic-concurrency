@@ -6,12 +6,42 @@
 namespace DeterministicConcurrency{
     enum class tick_tock_t{
         TICK,
-        TOCK
+        TOCK,
+        NOT_STARTED,
+        FINISHED
     };
     class thread_context {
     public:
-        thread_context() noexcept : mutex_(), tick_tock(), tick_tock_v(tick_tock_t::TOCK) {}
+        thread_context() noexcept : mutex_(), tick_tock(), tick_tock_v(tick_tock_t::NOT_STARTED) {}
 
+        /*
+        Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
+        */
+        void switchContext(){
+            tock();
+            wait_for_tick();
+        }
+
+        void start(){
+            std::unique_lock<std::mutex> lock(mutex_);
+            while (tick_tock_v == tick_tock_t::NOT_STARTED) // while it is tock the other thread is going
+                tick_tock.wait(lock);
+        }
+
+        void finish(){
+            {
+                std::unique_lock<std::mutex> lock(mutex_);
+                tick_tock_v = tick_tock_t::FINISHED;
+            }
+            tick_tock.notify_one();
+        }
+
+        std::mutex mutex_;
+        std::condition_variable tick_tock;
+        tick_tock_t tick_tock_v;
+
+        private:
+        
         /*
         Allow the scheduler to proceed its execution
         */
@@ -32,17 +62,6 @@ namespace DeterministicConcurrency{
                 tick_tock.wait(lock);
         }
 
-        /*
-        Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
-        */
-        void switchContext(){
-            tock();
-            wait_for_tick();
-        }
-
-        std::mutex mutex_;
-        std::condition_variable tick_tock;
-        tick_tock_t tick_tock_v;
     };
 
     class DeterministicThread {
@@ -61,6 +80,7 @@ namespace DeterministicConcurrency{
         void tick() {
             {
                 std::unique_lock<std::mutex> lock(_this_thread->mutex_);
+                if (_this_thread->tick_tock_v == tick_tock_t::FINISHED)return;
                 _this_thread->tick_tock_v = tick_tock_t::TICK;
             }
             _this_thread->tick_tock.notify_one();

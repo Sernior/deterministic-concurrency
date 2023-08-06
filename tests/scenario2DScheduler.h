@@ -12,7 +12,7 @@ namespace scenario2DS{
     static std::vector<int> ret2_after;
 
     void threadFunc1(DeterministicConcurrency::thread_context* t, int arg1, int arg2) {
-        t->wait_for_tick();
+        t->start();
 
         ret1_before.push_back(arg1);
 
@@ -20,11 +20,11 @@ namespace scenario2DS{
 
         ret1_after.push_back(arg2);
         
-        t->tock();
+        t->finish();
     }
 
     void threadFunc2(DeterministicConcurrency::thread_context* t, int arg1, int arg2) {
-        t->wait_for_tick();
+        t->start();
 
         ret2_before.push_back(arg1);
 
@@ -32,7 +32,7 @@ namespace scenario2DS{
 
         ret2_after.push_back(arg2);
         
-        t->tock();
+        t->finish();
     }
 
     static DeterministicConcurrency::UserControlledScheduler<4> sch{
