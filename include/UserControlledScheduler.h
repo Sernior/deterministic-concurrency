@@ -1,7 +1,7 @@
 #pragma once
 #include <DeterministicConcurrency>
 #include <cstddef>
-#include <Array>
+#include <array>
 #include <tuple>
 
 namespace DeterministicConcurrency{
