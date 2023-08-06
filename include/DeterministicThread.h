@@ -2,6 +2,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <tuple>
 
 namespace DeterministicConcurrency{
     enum class tick_tock_t{
@@ -10,6 +11,8 @@ namespace DeterministicConcurrency{
         NOT_STARTED,
         FINISHED
     };
+
+    class DeterministicThread;
     class thread_context {
     public:
         thread_context() noexcept : mutex_(), tick_tock(), tick_tock_v(tick_tock_t::NOT_STARTED) {}
@@ -22,6 +25,9 @@ namespace DeterministicConcurrency{
             wait_for_tick();
         }
 
+        private:
+
+        friend class DeterministicThread;
         /*
         Wait until the scheduler switch context to this thread
         */
@@ -41,12 +47,6 @@ namespace DeterministicConcurrency{
             }
             tick_tock.notify_one();
         }
-
-        std::mutex mutex_;
-        std::condition_variable tick_tock;
-        tick_tock_t tick_tock_v;
-
-        private:
         
         /*
         Allow the scheduler to proceed its execution
@@ -68,13 +68,22 @@ namespace DeterministicConcurrency{
                 tick_tock.wait(lock);
         }
 
+        std::mutex mutex_;
+        std::condition_variable tick_tock;
+        tick_tock_t tick_tock_v;
+
     };
 
     class DeterministicThread {
     public:
         template <typename Func, typename... Args>
         explicit DeterministicThread(thread_context* t ,Func&& func, Args&&... args)
-            : _thread(std::forward<Func>(func), t, std::forward<Args>(args)...), _this_thread(t) {}
+            : _thread([function = std::forward<Func>(func), t, tuple = std::make_tuple(std::forward<Args>(args)...)]() mutable {
+                t->start();
+                std::apply(function, std::tuple_cat(std::make_tuple(t), tuple));
+                t->finish();
+            })
+            , _this_thread(t) {}
 
         void join() {
             _thread.join();

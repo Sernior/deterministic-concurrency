@@ -12,27 +12,19 @@ namespace scenario2DS{
     static std::vector<int> ret2_after;
 
     void threadFunc1(DeterministicConcurrency::thread_context* t, int arg1, int arg2) {
-        t->start();
-
         ret1_before.push_back(arg1);
 
         t->switchContext();
 
         ret1_after.push_back(arg2);
-        
-        t->finish();
     }
 
     void threadFunc2(DeterministicConcurrency::thread_context* t, int arg1, int arg2) {
-        t->start();
-
         ret2_before.push_back(arg1);
 
         t->switchContext();
 
         ret2_after.push_back(arg2);
-        
-        t->finish();
     }
 
     static DeterministicConcurrency::UserControlledScheduler<4> sch{

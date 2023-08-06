@@ -23,7 +23,7 @@ namespace DeterministicConcurrency{
 
 
         /*
-        Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back or tock()
+        Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back
         */
         template<typename... Args>
         void switchContextTo(Args&&... threadIndixes){
@@ -32,37 +32,11 @@ namespace DeterministicConcurrency{
         }
 
         /*
-        Wait until the threads with threadIndixes tock()
+        Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back
         */
-        template<typename... Args>
-        void wait(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].wait_for_tock(), ...);
-        }
-
-        /*
-        Wait until all threads tock()
-        */
-        void waitAll(){
-            for (auto& _thread : _threads)
-                _thread.wait_for_tock();
-        }
-
-        /*
-        Tick threadIndixes threads, allowing them to continue if they were waiting for tick()
-        */
-        template<typename... Args>
-        void tick(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].tick(), ...);
-        }
-
-        /*
-        Tick all threads, allowing them to continue if they were waiting for tick()
-        */
-        void tickAll(){
-            for (auto& _thread : _threads)
-                _thread.tick();
+        void switchContextAll(){
+            tickAll();
+            waitAll();
         }
 
         /*
@@ -93,6 +67,40 @@ namespace DeterministicConcurrency{
             : UserControlledScheduler{
                 emplace_t{}, std::tuple_cat(std::tuple{&std::get<Is>(_contexts)},
                                             static_cast<Tuples&&>(tuples))...} {}
+
+        /*
+        Tick threadIndixes threads, allowing them to continue if they were waiting for tick()
+        */
+        template<typename... Args>
+        void tick(Args&&... threadIndixes){
+            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
+            (_threads[threadIndixes].tick(), ...);
+        }
+
+        /*
+        Tick all threads, allowing them to continue if they were waiting for tick()
+        */
+        void tickAll(){
+            for (auto& _thread : _threads)
+                _thread.tick();
+        }
+
+        /*
+        Wait until the threads with threadIndixes tock()
+        */
+        template<typename... Args>
+        void wait(Args&&... threadIndixes){
+            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
+            (_threads[threadIndixes].wait_for_tock(), ...);
+        }
+
+        /*
+        Wait until all threads tock()
+        */
+        void waitAll(){
+            for (auto& _thread : _threads)
+                _thread.wait_for_tock();
+        }
 
         std::array<thread_context, N> _contexts;
         std::array<DeterministicThread, N> _threads;

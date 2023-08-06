@@ -6,11 +6,7 @@ namespace scenario1DS{
     static std::vector<int> ret;
 
     void threadFunc(DeterministicConcurrency::thread_context* t, int arg) {
-        t->start();
-
         ret.push_back(arg);
-
-        t->finish();
     }
 
     static DeterministicConcurrency::UserControlledScheduler<10> sch{
