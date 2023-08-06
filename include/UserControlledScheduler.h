@@ -97,5 +97,10 @@ namespace DeterministicConcurrency{
         std::array<thread_context, N> _contexts;
         std::array<DeterministicThread, N> _threads;
     };
+
+    template<typename... Tuples>
+    auto make_UserControlledScheduler(Tuples&&... tuples) {
+        return UserControlledScheduler<sizeof...(Tuples)>(static_cast<Tuples&&>(tuples)...);
+    }
     
 }
