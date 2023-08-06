@@ -22,12 +22,18 @@ namespace DeterministicConcurrency{
             wait_for_tick();
         }
 
+        /*
+        Wait until the scheduler switch context to this thread
+        */
         void start(){
             std::unique_lock<std::mutex> lock(mutex_);
-            while (tick_tock_v == tick_tock_t::NOT_STARTED) // while it is tock the other thread is going
+            while (tick_tock_v == tick_tock_t::NOT_STARTED)
                 tick_tock.wait(lock);
         }
 
+        /*
+        Notify the scheduler that this thread has finished not allowing the scheduler anymore to switch context to this thread
+        */
         void finish(){
             {
                 std::unique_lock<std::mutex> lock(mutex_);

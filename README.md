@@ -77,7 +77,7 @@ include(FetchContent)
 FetchContent_Declare(
   dc
   GIT_REPOSITORY https://github.com/Sernior/deterministic-concurrency.git
-  GIT_TAG v1.0.0
+  GIT_TAG [TAG] #change with the tag you want to use
 )
 
 FetchContent_MakeAvailable(dc)
@@ -97,19 +97,19 @@ Include the library:
 Define the functions you want the threads to execute:
 ```
 void f(DeterministicConcurrency::thread_context* c ,int a, int b){
-    c->wait_for_tick();
+    c->start(); // wait until the scheduler switch context to this thread. After this point the thread is considered started
     std::cout << a;
-    c->switchContext();
+    c->switchContext(); // wait until the scheduler switch context to this thread
     std::cout << b;
-    c->tock();
+    c->finish(); // notify the scheduler this thread is finished. After this point the scheduler wont be able to switch context to this thread anymore
 }
 
 void h(DeterministicConcurrency::thread_context* c ,int a, int b){
-    c->wait_for_tick();
+    c->start();
     std::cout << b;
     c->switchContext();
     std::cout << a;
-    c->tock();
+    c->finish();
 }
 ```
 The first parameter must always be a pointer to DeterministicConcurrency::thread_context.<br /><br />
@@ -130,7 +130,7 @@ sch.switchContextTo(1);
 ```
 And you will end up printing "2013".<br /><br />
 The "main" thread (the one which defines the scheduler) and the threads synchronize through a system of tick() and tock() (my own definition of time).<br />
-The scheduler can tick a specific thread **`sch.tick(0)`** allowing it to continue (you could also tick multiple threads to simulate real parallelism **`sch.tick(0,1)`**); and it can also use **`sch.wait(indexes...)`** to wait until threads use on their **`thread_context`** tock.<br />
+The scheduler can tick a specific thread **`sch.tick(0)`** allowing it to continue (you could also tick multiple threads to simulate real parallelism **`sch.tick(0,1)`**); and it can also use **`sch.wait(indexes...)`** to wait until threads use on their **`thread_context`** switchContext.<br />
 **`switchContextTo`** is just a tick followed by a wait and the same goes for the **`thread_context::switchContext`**.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -161,5 +161,6 @@ Federico Abrignani - federignoli@hotmail.it
 
 * Federico Abrignani (Author)
 * Paolo Di Giglio (Contributor)
+* Salvatore Martorana (Contributor)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
