@@ -1,4 +1,5 @@
 #pragma once
+#include <DeterministicConcurrency>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
@@ -6,16 +7,17 @@
 
 namespace DeterministicConcurrency{
     enum class tick_tock_t{
-        TICK,
-        TOCK,
+        RUNNING,
+        WAITING,
         NOT_STARTED,
-        FINISHED
+        FINISHED,
+        WAITING_EXTERNAL
     };
 
     class DeterministicThread;
     class thread_context {
     public:
-        thread_context() noexcept : mutex_(), tick_tock(), tick_tock_v(tick_tock_t::NOT_STARTED) {}
+        thread_context() noexcept : control_mutex(), tick_tock(), tick_tock_v(tick_tock_t::NOT_STARTED) {}
 
         /*
         Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
@@ -25,14 +27,27 @@ namespace DeterministicConcurrency{
             wait_for_tick();
         }
 
+        template<typename Func>
+        void tryLock(Func func){
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            tick_tock_v = DeterministicConcurrency::tick_tock_t::WAITING_EXTERNAL;
+            func();
+            tick_tock_v = DeterministicConcurrency::tick_tock_t::RUNNING;
+            }
+        }
+
         private:
 
         friend class DeterministicThread;
+
+        template<size_t N>
+        friend class UserControlledScheduler;
         /*
         Wait until the scheduler switch context to this thread
         */
         void start(){
-            std::unique_lock<std::mutex> lock(mutex_);
+            std::unique_lock<std::mutex> lock(control_mutex);
             while (tick_tock_v == tick_tock_t::NOT_STARTED)
                 tick_tock.wait(lock);
         }
@@ -42,7 +57,7 @@ namespace DeterministicConcurrency{
         */
         void finish(){
             {
-                std::unique_lock<std::mutex> lock(mutex_);
+                std::unique_lock<std::mutex> lock(control_mutex);
                 tick_tock_v = tick_tock_t::FINISHED;
             }
             tick_tock.notify_one();
@@ -53,8 +68,8 @@ namespace DeterministicConcurrency{
         */
         void tock() {
             {
-                std::unique_lock<std::mutex> lock(mutex_);
-                tick_tock_v = tick_tock_t::TOCK;
+                std::unique_lock<std::mutex> lock(control_mutex);
+                tick_tock_v = tick_tock_t::WAITING;
             }
             tick_tock.notify_one();
         }
@@ -63,15 +78,14 @@ namespace DeterministicConcurrency{
         Wait until the scheduler notify this thread
         */
         void wait_for_tick(){
-            std::unique_lock<std::mutex> lock(mutex_);
-            while (tick_tock_v == tick_tock_t::TOCK) // while it is tock the other thread is going
+            std::unique_lock<std::mutex> lock(control_mutex);
+            while (tick_tock_v == tick_tock_t::WAITING) // while it is tock the other thread is going
                 tick_tock.wait(lock);
         }
 
-        std::mutex mutex_;
         std::condition_variable tick_tock;
         tick_tock_t tick_tock_v;
-
+        std::mutex control_mutex;
     };
 
     class DeterministicThread {
@@ -94,9 +108,9 @@ namespace DeterministicConcurrency{
         */
         void tick() {
             {
-                std::unique_lock<std::mutex> lock(_this_thread->mutex_);
+                std::unique_lock<std::mutex> lock(_this_thread->control_mutex);
                 if (_this_thread->tick_tock_v == tick_tock_t::FINISHED)return;
-                _this_thread->tick_tock_v = tick_tock_t::TICK;
+                _this_thread->tick_tock_v = tick_tock_t::RUNNING;
             }
             _this_thread->tick_tock.notify_one();
         }
@@ -105,8 +119,8 @@ namespace DeterministicConcurrency{
         Wait until the thread notify the scheduler
         */
         void wait_for_tock(){
-            std::unique_lock<std::mutex> lock(_this_thread->mutex_);
-            while (_this_thread->tick_tock_v == tick_tock_t::TICK)// while it is tick the other thread is going
+            std::unique_lock<std::mutex> lock(_this_thread->control_mutex);
+            while (_this_thread->tick_tock_v == tick_tock_t::RUNNING)// while it is tick the other thread is going
                 _this_thread->tick_tock.wait(lock);
         }
 

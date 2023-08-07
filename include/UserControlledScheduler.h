@@ -12,6 +12,30 @@ namespace DeterministicConcurrency{
         struct emplace_t {};
 
         public:
+        template<typename... Args>
+        void waitUntilWAITING_EXTERNAL(Args&&... args){
+            size_t ret = 0;
+            for(;ret == sizeof...(args);){
+                ([&]{
+                    if (getThreadStatus(args) == DeterministicConcurrency::tick_tock_t::WAITING_EXTERNAL)
+                        ret = args;
+                }(),...);
+            }
+            return;
+        }
+
+        template<typename... Args>
+        size_t waitUntilWAITING(Args&&... args){
+            size_t ret = -1;
+            for (;ret == -1;){
+                ([&]{
+                    if (getThreadStatus(args) == DeterministicConcurrency::tick_tock_t::WAITING)
+                        ret = args;
+                }(),...);
+            }
+            return ret;
+        }
+
 
         /*
         Construct a UserControlledScheduler controlling N threads
@@ -56,6 +80,19 @@ namespace DeterministicConcurrency{
                 _thread.join();
         }
 
+        /*
+        Tick threadIndixes threads, allowing them to continue if they were waiting for tick()
+        */
+        template<typename... Args>
+        void tick(Args&&... threadIndixes){
+            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
+            (_threads[threadIndixes].tick(), ...);
+        }
+
+        tick_tock_t getThreadStatus(size_t index){
+            return _contexts[index].tick_tock_v;
+        }
+
         private:
 
         template <typename... Tuples>
@@ -68,14 +105,6 @@ namespace DeterministicConcurrency{
                 emplace_t{}, std::tuple_cat(std::tuple{&std::get<Is>(_contexts)},
                                             static_cast<Tuples&&>(tuples))...} {}
 
-        /*
-        Tick threadIndixes threads, allowing them to continue if they were waiting for tick()
-        */
-        template<typename... Args>
-        void tick(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].tick(), ...);
-        }
 
         /*
         Tick all threads, allowing them to continue if they were waiting for tick()
