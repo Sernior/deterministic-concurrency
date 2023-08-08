@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <array>
 #include <tuple>
+#include <chrono>
+#include <thread>
 
 namespace DeterministicConcurrency{
 
@@ -28,6 +30,7 @@ namespace DeterministicConcurrency{
         void waitUntilAllThreadStatus(Args&&... threadIndixes){
             size_t numThreadsWaitingExternal = 0;
             for(;numThreadsWaitingExternal != sizeof...(threadIndixes);){
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 ([&]{
                     if (getThreadStatus(threadIndixes) == S)
                         numThreadsWaitingExternal++;
@@ -43,6 +46,7 @@ namespace DeterministicConcurrency{
         size_t waitUntilOneThreadStatus(Args&&... threadIndixes){
             size_t threadIndex = -1;
             for (;threadIndex == -1;){
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 ([&]{
                     if (getThreadStatus(threadIndixes) == S)
                         threadIndex = threadIndixes;
