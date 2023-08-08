@@ -94,41 +94,7 @@ Include the library:
 ```
 #include <DeterministicConcurrency>
 ```
-Define the functions you want the threads to execute:
-```
-void f(DeterministicConcurrency::thread_context* c ,int a, int b){
-    std::cout << a;
-    c->switchContext(); // wait until the scheduler switch context to this thread
-    std::cout << b;
-}
-
-void h(DeterministicConcurrency::thread_context* c ,int a, int b){
-    std::cout << b;
-    c->switchContext();
-    std::cout << a;
-}
-```
-The first parameter must always be a pointer to DeterministicConcurrency::thread_context.<br /><br />
-Now define your user controlled scheduler:
-```
-DeterministicConcurrency::UserControlledScheduler<2> sch{std::tuple{&f, 0, 1}, std::tuple{&h, 3, 2}};
-```
-This defines a scheduler which control 2 threads.<br />
-The elements in the tuple after &f and &h are the arguments that will be passed to **`f`** and **`h`**.<br />
-These threads will wait until they have been given permission from the scheduler to execute **`f`** and **`h`** (using switchContextTo).<br />
-**`UserControlledScheduler::switchContextTo(threadIndexes...)`** and **`thread_context::switchContext()`** will block the caller thread until the context is given back.<br />
-What threads are within the **`UserControlledScheduler`** is elements in a std::array; you can think their indexes as their threadIDs.<br /><br />
-For instance in this example you can do:
-```
-sch.switchContextTo(1);
-sch.switchContextTo(0);
-sch.switchContextTo(0);
-sch.switchContextTo(1);
-```
-And you will end up printing "2013".<br /><br />
-The "main" thread (the one which defines the scheduler) and the threads synchronize through a system of tick() and tock() (my own definition of time).<br />
-The scheduler can switch context to a specific thread **`sch.switchContextTo(1)`** allowing it to continue (you could also switch context to multiple threads to simulate real parallelism **`sch.switchContextTo(0,1)`**); and it can also use **`sch.joinOn(indexes...)`** to wait until threads finish.<br />
-
+Outdated needs to be rewrote. TODO.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
