@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14.0)
 
 set(PROJ_NAME "Deterministic Concurrency")
-project(${PROJ_NAME} VERSION 1.0.0 LANGUAGES CXX)
+project(${PROJ_NAME} VERSION 1.4.0 LANGUAGES CXX)
 
 add_library(deterministic_concurrency INTERFACE)
 target_include_directories(deterministic_concurrency INTERFACE include)

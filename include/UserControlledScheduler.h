@@ -12,30 +12,6 @@ namespace DeterministicConcurrency{
         struct emplace_t {};
 
         public:
-        template<typename... Args>
-        void waitUntilWAITING_EXTERNAL(Args&&... args){
-            size_t ret = 0;
-            for(;ret == sizeof...(args);){
-                ([&]{
-                    if (getThreadStatus(args) == DeterministicConcurrency::tick_tock_t::WAITING_EXTERNAL)
-                        ret = args;
-                }(),...);
-            }
-            return;
-        }
-
-        template<typename... Args>
-        size_t waitUntilWAITING(Args&&... args){
-            size_t ret = -1;
-            for (;ret == -1;){
-                ([&]{
-                    if (getThreadStatus(args) == DeterministicConcurrency::tick_tock_t::WAITING)
-                        ret = args;
-                }(),...);
-            }
-            return ret;
-        }
-
 
         /*
         Construct a UserControlledScheduler controlling N threads
@@ -45,26 +21,56 @@ namespace DeterministicConcurrency{
             : UserControlledScheduler{std::index_sequence_for<Tuples...>{},
                                 static_cast<Tuples&&>(tuples)...} {}
 
+        /*
+        Wait until all of the threadIndixes threads have thread_status_v equal to S
+        */
+        template<thread_status_t S, typename... Args>
+        void waitUntilAllThreadStatus(Args&&... threadIndixes){
+            size_t numThreadsWaitingExternal = 0;
+            for(;numThreadsWaitingExternal != sizeof...(threadIndixes);){
+                ([&]{
+                    if (getThreadStatus(threadIndixes) == S)
+                        numThreadsWaitingExternal++;
+                }(),...);
+            }
+            return;
+        }
+
+        /*
+        Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S
+        */
+        template<thread_status_t S, typename... Args>
+        size_t waitUntilOneThreadStatus(Args&&... threadIndixes){
+            size_t threadIndex = -1;
+            for (;threadIndex == -1;){
+                ([&]{
+                    if (getThreadStatus(threadIndixes) == S)
+                        threadIndex = threadIndixes;
+                }(),...);
+            }
+            return threadIndex;
+        }
 
         /*
         Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back
         */
         template<typename... Args>
         void switchContextTo(Args&&... threadIndixes){
-            tick(static_cast<decltype(threadIndixes)>(threadIndixes)...);
-            wait(static_cast<decltype(threadIndixes)>(threadIndixes)...);
+            ([&]{
+                proceed(threadIndixes);
+                wait(threadIndixes);
+            }(),...);
         }
 
         /*
         Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back
         */
         void switchContextAll(){
-            tickAll();
-            waitAll();
+            switchContextAll(std::make_index_sequence<N>());
         }
 
         /*
-        Performa a join on the threads with threadIndixes
+        Perform a join on the threads with threadIndixes
         */
         template<typename... Args>
         void joinOn(Args&&... threadIndixes){
@@ -73,7 +79,7 @@ namespace DeterministicConcurrency{
         }
 
         /*
-        Performa a join on all threads
+        Perform a join on all threads
         */
         void joinAll(){
             for (auto& _thread : _threads)
@@ -81,16 +87,25 @@ namespace DeterministicConcurrency{
         }
 
         /*
-        Tick threadIndixes threads, allowing them to continue if they were waiting for tick()
+        Tick threadIndixes threads, allowing them to continue if they were in WAITING status
         */
         template<typename... Args>
-        void tick(Args&&... threadIndixes){
+        void proceed(Args&&... threadIndixes){
             static_assert(sizeof...(threadIndixes) <= N, "Too many args");
             (_threads[threadIndixes].tick(), ...);
         }
 
-        tick_tock_t getThreadStatus(size_t index){
-            return _contexts[index].tick_tock_v;
+        /*
+        Wait until the threads with threadIndixes go into WAITING status
+        */
+        template<typename... Args>
+        void wait(Args&&... threadIndixes){
+            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
+            (_threads[threadIndixes].wait_for_tock(), ...);
+        }
+
+        thread_status_t getThreadStatus(size_t threadIndixes){
+            return _contexts[threadIndixes].thread_status_v;
         }
 
         private:
@@ -106,29 +121,12 @@ namespace DeterministicConcurrency{
                                             static_cast<Tuples&&>(tuples))...} {}
 
 
-        /*
-        Tick all threads, allowing them to continue if they were waiting for tick()
-        */
-        void tickAll(){
-            for (auto& _thread : _threads)
-                _thread.tick();
-        }
-
-        /*
-        Wait until the threads with threadIndixes tock()
-        */
-        template<typename... Args>
-        void wait(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].wait_for_tock(), ...);
-        }
-
-        /*
-        Wait until all threads tock()
-        */
-        void waitAll(){
-            for (auto& _thread : _threads)
-                _thread.wait_for_tock();
+        template <std::size_t... Is>
+        void switchContextAll(std::index_sequence<Is...>){
+            ([&]{
+                proceed(Is);
+                wait(Is);
+            }(),...);
         }
 
         std::array<thread_context, N> _contexts;
