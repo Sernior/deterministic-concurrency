@@ -28,12 +28,12 @@ namespace DeterministicConcurrency{
         */
         template<thread_status_t S, typename... Args>
         void waitUntilAllThreadStatus(Args&&... threadIndixes){
-            size_t numThreadsWaitingExternal = 0;
-            for(;numThreadsWaitingExternal != sizeof...(threadIndixes);){
+            for(size_t numThreads = 0; numThreads != sizeof...(threadIndixes);){
+                numThreads = 0;
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 ([&]{
                     if (getThreadStatus(threadIndixes) == S)
-                        numThreadsWaitingExternal++;
+                        numThreads++;
                 }(),...);
             }
             return;
