@@ -29,10 +29,36 @@ namespace DeterministicConcurrency{
 
         template<typename BasicLockable>
         void uniqueLock(BasicLockable* lockable){
+
+            {
             std::lock_guard<std::mutex> lock(control_mutex);
             thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
+            }
+
             lockable->lock();
+            
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
             thread_status_v = DeterministicConcurrency::thread_status_t::RUNNING;
+            }
+
+        }
+
+        template<typename BasicLockable>
+        void uniqueLock(BasicLockable* lockable, int prio){
+
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
+            }
+
+            lockable->lock(prio);
+            
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            thread_status_v = DeterministicConcurrency::thread_status_t::RUNNING;
+            }
+
         }
 
         private:
@@ -77,12 +103,12 @@ namespace DeterministicConcurrency{
         */
         void wait_for_tick(){
             std::unique_lock<std::mutex> lock(control_mutex);
-            while (thread_status_v == thread_status_t::WAITING) // while it is tock the other thread is going
+            while (thread_status_v == thread_status_t::WAITING)
                 tick_tock.wait(lock);
         }
 
         std::condition_variable tick_tock;
-        thread_status_t thread_status_v;
+        volatile thread_status_t thread_status_v;
         std::mutex control_mutex;
     };
 
@@ -118,7 +144,7 @@ namespace DeterministicConcurrency{
         */
         void wait_for_tock(){
             std::unique_lock<std::mutex> lock(_this_thread->control_mutex);
-            while (_this_thread->thread_status_v == thread_status_t::RUNNING)// while it is tick the other thread is going
+            while (_this_thread->thread_status_v == thread_status_t::RUNNING)
                 _this_thread->tick_tock.wait(lock);
         }
 

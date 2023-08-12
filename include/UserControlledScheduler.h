@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <array>
 #include <tuple>
+#include <type_traits>
 #include <chrono>
 #include <thread>
 
@@ -24,19 +25,27 @@ namespace DeterministicConcurrency{
                                 static_cast<Tuples&&>(tuples)...} {}
 
         /*
-        Wait until all of the threadIndixes threads have thread_status_v equal to S
+        Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the resolution for S == WAITING_EXTERNAL
         */
         template<thread_status_t S, typename... Args>
         void waitUntilAllThreadStatus(Args&&... threadIndixes){
             for(size_t numThreads = 0; numThreads != sizeof...(threadIndixes);){
-                numThreads = 0;
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                numThreads = 0;
                 ([&]{
                     if (getThreadStatus(threadIndixes) == S)
                         numThreads++;
                 }(),...);
             }
             return;
+        }
+
+        template<typename BasicLockable>
+        void waitUntilLocked(BasicLockable* lockable){
+            while (lockable->try_lock()){
+                lockable->unlock();
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
         }
 
         /*

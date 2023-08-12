@@ -57,18 +57,22 @@ int main()
 
     sch1.switchContextTo(0);
     sch1.proceed(1);
+    sch1.waitUntilLocked(&ctrl_mutex);
     sch1.waitUntilAllThreadStatus<DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL>(1);
     sch1.switchContextTo(0);
     auto index1 = sch1.waitUntilOneThreadStatus<DeterministicConcurrency::thread_status_t::WAITING>(1);
     sch1.proceed(2);
+    sch1.waitUntilLocked(&ctrl_mutex);
     sch1.waitUntilAllThreadStatus<DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL>(2);
     sch1.switchContextTo(index1);
     index1 = sch1.waitUntilOneThreadStatus<DeterministicConcurrency::thread_status_t::WAITING>(2);
     sch1.proceed(3);   
+    sch1.waitUntilLocked(&ctrl_mutex);
     sch1.waitUntilAllThreadStatus<DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL>(3);
     sch1.switchContextTo(index1);
     index1 = sch1.waitUntilOneThreadStatus<DeterministicConcurrency::thread_status_t::WAITING>(3);
     sch1.proceed(4); 
+    sch1.waitUntilLocked(&ctrl_mutex);
     sch1.waitUntilAllThreadStatus<DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL>(4);
     sch1.switchContextTo(index1);
     index1 = sch1.waitUntilOneThreadStatus<DeterministicConcurrency::thread_status_t::WAITING>(4);
