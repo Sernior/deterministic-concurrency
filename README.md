@@ -50,7 +50,7 @@ While primarily designed for testing, the User-Controlled Scheduler can also ser
 This is an header only library but you can build the main.cpp which contains a simple test using:
 
    ```sh
-   cmake . -B build -DDC_COMPILE_MAIN=ON -G Ninja
+   cmake . -B build -DDC_COMPILE_MAIN=ON -DBOOST_ROOT="you/boost/dir" -G Ninja
    ```
 
    ```sh
