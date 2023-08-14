@@ -61,15 +61,15 @@ namespace DeterministicConcurrency{
 
         }
 
-        template<typename BasicLockable>
-        void uniqueLock(BasicLockable* lockable, int prio){
+        template<typename BasicLockable, typename... Args>
+        void lock(BasicLockable* lockable, Args&&... args){
 
             {
             std::lock_guard<std::mutex> lock(control_mutex);
             thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
             }
 
-            lockable->lock(prio);
+            lockable->lock(std::forward<Args>(args)...);
             
             {
             std::lock_guard<std::mutex> lock(control_mutex);
