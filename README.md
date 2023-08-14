@@ -52,7 +52,7 @@ If for some reason, on some compilers, it doesn`t work on C++17+ please email me
 This is an header only library but you can build the `main.cpp` which contains a simple test using:
 
    ```sh
-   $ cmake . -B build -DDC_COMPILE_MAIN=ON -DBOOST_ROOT="you/boost/dir" -G Ninja-DBOOST_ROOT="you/boost/dir" -G Ninja
+   $ cmake . -B build -DDC_COMPILE_MAIN=ON -G Ninja
    ```
 
    ```sh
