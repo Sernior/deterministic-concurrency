@@ -27,40 +27,6 @@ namespace DeterministicConcurrency{
             wait_for_tick();
         }
 
-        template<typename BasicLockable>
-        void lock(BasicLockable* lockable){
-
-            {
-            std::lock_guard<std::mutex> lock(control_mutex);
-            thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
-            }
-
-            lockable->lock();
-            
-            {
-            std::lock_guard<std::mutex> lock(control_mutex);
-            thread_status_v = DeterministicConcurrency::thread_status_t::RUNNING;
-            }
-
-        }
-
-        template<typename BasicLockable>
-        void lock_shared(BasicLockable* lockable){
-
-            {
-            std::lock_guard<std::mutex> lock(control_mutex);
-            thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
-            }
-
-            lockable->lock_shared();
-            
-            {
-            std::lock_guard<std::mutex> lock(control_mutex);
-            thread_status_v = DeterministicConcurrency::thread_status_t::RUNNING;
-            }
-
-        }
-
         template<typename BasicLockable, typename... Args>
         void lock(BasicLockable* lockable, Args&&... args){
 
@@ -70,6 +36,23 @@ namespace DeterministicConcurrency{
             }
 
             lockable->lock(std::forward<Args>(args)...);
+            
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            thread_status_v = DeterministicConcurrency::thread_status_t::RUNNING;
+            }
+
+        }
+
+        template<typename BasicLockable, typename... Args>
+        void lock_shared(BasicLockable* lockable, Args&&... args){
+
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
+            }
+
+            lockable->lock_shared(std::forward<Args>(args)...);
             
             {
             std::lock_guard<std::mutex> lock(control_mutex);
