@@ -8,7 +8,7 @@ static std::mutex ctrl_mutex;
 
 void f(DeterministicConcurrency::thread_context* c ,int a, int b){
     std::cout << a;
-    c->uniqueLock(&ctrl_mutex);
+    c->lock(&ctrl_mutex);
     c->switchContext();
     ctrl_mutex.unlock();
     std::cout << b;
@@ -16,7 +16,7 @@ void f(DeterministicConcurrency::thread_context* c ,int a, int b){
 
 void h(DeterministicConcurrency::thread_context* c ,int a, int b){
     std::cout << b;
-    c->uniqueLock(&ctrl_mutex);
+    c->lock(&ctrl_mutex);
     c->switchContext();
     ctrl_mutex.unlock();
     std::cout << a;
@@ -32,7 +32,7 @@ static std::vector<uint32_t> input_Vector = {0, 1, 2, 3, 4};
 static std::vector<uint32_t> fair_input;
 
 void test_custom_mutex (DeterministicConcurrency::thread_context* c, uint32_t a) {
-    c->uniqueLock(&ctrl_mutex);
+    c->lock(&ctrl_mutex);
     c->switchContext();
     fair_input.push_back(a);
     ctrl_mutex.unlock();

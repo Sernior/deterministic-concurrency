@@ -28,7 +28,7 @@ namespace DeterministicConcurrency{
         }
 
         template<typename BasicLockable>
-        void uniqueLock(BasicLockable* lockable){
+        void lock(BasicLockable* lockable){
 
             {
             std::lock_guard<std::mutex> lock(control_mutex);
@@ -36,6 +36,23 @@ namespace DeterministicConcurrency{
             }
 
             lockable->lock();
+            
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            thread_status_v = DeterministicConcurrency::thread_status_t::RUNNING;
+            }
+
+        }
+
+        template<typename BasicLockable>
+        void lock_shared(BasicLockable* lockable){
+
+            {
+            std::lock_guard<std::mutex> lock(control_mutex);
+            thread_status_v = DeterministicConcurrency::thread_status_t::WAITING_EXTERNAL;
+            }
+
+            lockable->lock_shared();
             
             {
             std::lock_guard<std::mutex> lock(control_mutex);
