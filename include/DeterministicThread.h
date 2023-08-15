@@ -19,9 +19,10 @@ namespace DeterministicConcurrency{
     public:
         thread_context() noexcept : control_mutex(), tick_tock(), thread_status_v(thread_status_t::NOT_STARTED) {}
 
-        /*
-        Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
-        */
+        /**
+         * @brief Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back
+         * @return void
+         */
         void switchContext(){
             tock();
             wait_for_tick();
@@ -67,9 +68,11 @@ namespace DeterministicConcurrency{
 
         template<size_t N>
         friend class UserControlledScheduler;
-        /*
-        Wait until the scheduler switch context to this thread
-        */
+        /**
+         * @brief Wait until the scheduler switch context to this thread
+         * 
+         * @return void 
+         */
         void start(){
             std::unique_lock<std::mutex> lock(control_mutex);
             while (thread_status_v == thread_status_t::NOT_STARTED)

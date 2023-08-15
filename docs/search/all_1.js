@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['thread_5fcontext_2',['thread_context',['../classDeterministicConcurrency_1_1thread__context.html',1,'DeterministicConcurrency']]]
+  ['switchcontext_2',['switchContext',['../classDeterministicConcurrency_1_1thread__context.html#a0a7391dcb6a66e255b088c5c95809627',1,'DeterministicConcurrency::thread_context']]]
 ];

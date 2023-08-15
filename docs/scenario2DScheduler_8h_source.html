@@ -86,7 +86,7 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">void</span> threadFunc1(<a class="code" href="classDeterministicConcurrency_1_1thread__context.html">DeterministicConcurrency::thread_context</a>* t, <span class="keywordtype">int</span> arg1, <span class="keywordtype">int</span> arg2) {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        ret1_before.push_back(arg1);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        t-&gt;switchContext();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        t-&gt;<a class="code" href="classDeterministicConcurrency_1_1thread__context.html#a0a7391dcb6a66e255b088c5c95809627">switchContext</a>();</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        ret1_after.push_back(arg2);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> threadFunc2(<a class="code" href="classDeterministicConcurrency_1_1thread__context.html">DeterministicConcurrency::thread_context</a>* t, <span class="keywordtype">int</span> arg1, <span class="keywordtype">int</span> arg2) {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        ret2_before.push_back(arg1);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        t-&gt;switchContext();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        t-&gt;<a class="code" href="classDeterministicConcurrency_1_1thread__context.html#a0a7391dcb6a66e255b088c5c95809627">switchContext</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        ret2_after.push_back(arg2);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
@@ -117,6 +117,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a></div><div class="ttdef"><b>Definition:</b> UserControlledScheduler.h:13</div></div>
 <div class="ttc" id="aclassDeterministicConcurrency_1_1thread__context_html"><div class="ttname"><a href="classDeterministicConcurrency_1_1thread__context.html">DeterministicConcurrency::thread_context</a></div><div class="ttdef"><b>Definition:</b> DeterministicThread.h:18</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1thread__context_html_a0a7391dcb6a66e255b088c5c95809627"><div class="ttname"><a href="classDeterministicConcurrency_1_1thread__context.html#a0a7391dcb6a66e255b088c5c95809627">DeterministicConcurrency::thread_context::switchContext</a></div><div class="ttdeci">void switchContext()</div><div class="ttdoc">Notify the scheduler that this thread is ready to give it back the control and wait until the schedul...</div><div class="ttdef"><b>Definition:</b> DeterministicThread.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usercontrolledscheduler_3',['UserControlledScheduler',['../classDeterministicConcurrency_1_1UserControlledScheduler.html',1,'DeterministicConcurrency']]]
+  ['thread_5fcontext_3',['thread_context',['../classDeterministicConcurrency_1_1thread__context.html',1,'DeterministicConcurrency']]]
 ];
