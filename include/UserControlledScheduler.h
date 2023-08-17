@@ -9,6 +9,11 @@
 
 namespace DeterministicConcurrency{
 
+    /**
+     * @brief #TODO
+     * 
+     * @tparam N 
+     */
     template<size_t N>
     class UserControlledScheduler{
 

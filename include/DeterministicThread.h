@@ -15,6 +15,11 @@ namespace DeterministicConcurrency{
     };
 
     class DeterministicThread;
+
+    /**
+     * @brief #TODO
+     * 
+     */
     class thread_context {
     public:
         thread_context() noexcept : control_mutex(), tick_tock(), thread_status_v(thread_status_t::NOT_STARTED) {}
@@ -146,6 +151,10 @@ namespace DeterministicConcurrency{
         std::mutex control_mutex;
     };
 
+    /**
+     * @brief #TODO
+     * 
+     */
     class DeterministicThread {
     public:
         /**
