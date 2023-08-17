@@ -603,7 +603,7 @@ a.anchor {
 }
 
 #main-menu > li:last-child {
-    margin-right: 0;
+    margin-right: 30px;
 }
 
 @media screen and (max-width: 767px) {
