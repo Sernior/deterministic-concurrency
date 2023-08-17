@@ -13,7 +13,7 @@
 </div>
 
 
-<details>
+<!-- <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -32,7 +32,7 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Authors</a></li>
   </ol>
-</details>
+</details> -->
 
 ## About The Project
 

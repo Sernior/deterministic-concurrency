@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['switchcontext_8',['switchContext',['../classDeterministicConcurrency_1_1thread__context.html#a0a7391dcb6a66e255b088c5c95809627',1,'DeterministicConcurrency::thread_context']]]
+  ['deterministicthread_22',['DeterministicThread',['../classDeterministicConcurrency_1_1DeterministicThread.html#a0699a488368a0a145e7b432c5acf9d59',1,'DeterministicConcurrency::DeterministicThread']]]
 ];
