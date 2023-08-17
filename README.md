@@ -135,7 +135,8 @@ If you encounter any issues or would like to suggest new features, please don't 
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
-
+## Documentation
+The documentation is available at the following link: https://sernior.github.io/deterministic-concurrency/
 
 ## Contacts
 
@@ -145,7 +146,7 @@ Federico Abrignani - federignoli@hotmail.it
 
 ## Authors and Contributors
 
-* Federico Abrignani (Author)
-* Paolo Di Giglio (Contributor)
-* Salvatore Martorana (Contributor)
+* Federico Abrignani (Author) - https://github.com/Sernior
+* Paolo Di Giglio (Contributor) - https://github.com/pdigiglio
+* Salvatore Martorana (Contributor) - https://github.com/SMartorana
 
