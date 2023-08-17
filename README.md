@@ -40,8 +40,8 @@ Concurrency testing often poses challenges due to the `non-deterministic` nature
 While primarily designed for testing, the `UserControlledScheduler` can also serve as a framework to create synchronized thread pool-like structures for broader multithread applications.
 
 The assumptions are:
-  - when you go to create a `UserControlledScheduler`, you will need to use it.
-  - when you go to create `threads` (which will be managed by the `UserControlledScheduler`), the threads will have to start and finish their processing before the `UserControlledScheduler` is destroyed.
+  - `UserControlledScheduler` automatically creates a number of `std::threads` equal to the number of arguments you pass them; these `threads` are lazy and each one of them must be allowed to terminate by the `UserControlledScheduler`. 
+  - To allow a `thread` to finish, the `UserControlledScheduler` must allow these `threads` to proceed until they are in a `joinable` state.
 
 ## Getting Started
 ### Prerequisites
