@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['test_0',['TEST',['../test_8cpp.html#a14855a483d874104534f7d1b23e6e1e9',1,'TEST(UserCtrlSchedulerSimpleTest, Scenario1):&#160;test.cpp'],['../test_8cpp.html#a8a069378f17f80bcd5b3037228b9ff5f',1,'TEST(UserCtrlScheduler2ParallelismTest, Scenario1):&#160;test.cpp']]],
-  ['thread_5fcontext_1',['thread_context',['../classDeterministicConcurrency_1_1thread__context.html#a7eae7eee29b87e8efb4677a983cd0c47',1,'DeterministicConcurrency::thread_context']]],
-  ['threadfunc_2',['threadFunc',['../namespacescenario1DS.html#a7c48b8e3f6f94fff6ac82b2b4e5aed3b',1,'scenario1DS']]],
-  ['threadfunc1_3',['threadFunc1',['../namespacescenario2DS.html#a1afc08fa3aa380fb24be4f69cfbd8977',1,'scenario2DS']]],
-  ['threadfunc2_4',['threadFunc2',['../namespacescenario2DS.html#ac885e110257b6b835ecd359da9a3e6a4',1,'scenario2DS']]],
-  ['tick_5',['tick',['../classDeterministicConcurrency_1_1DeterministicThread.html#a0acf60945d2bdf4f445108d0ebfaf117',1,'DeterministicConcurrency::DeterministicThread']]]
+  ['wait_0',['wait',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f',1,'DeterministicConcurrency::UserControlledScheduler']]],
+  ['wait_5ffor_5ftock_1',['wait_for_tock',['../classDeterministicConcurrency_1_1DeterministicThread.html#abbbb37d91beaec16da06e7798c2e54da',1,'DeterministicConcurrency::DeterministicThread']]],
+  ['waituntilallthreadstatus_2',['waitUntilAllThreadStatus',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#a5ade605e91b79c39522d71b25cc34b9d',1,'DeterministicConcurrency::UserControlledScheduler']]],
+  ['waituntilonethreadstatus_3',['waitUntilOneThreadStatus',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#a5a7a3cedbcde50acac05edc549a050ff',1,'DeterministicConcurrency::UserControlledScheduler']]]
 ];

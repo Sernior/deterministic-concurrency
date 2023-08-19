@@ -8,7 +8,7 @@
 
 <div align="center">
   <p align="center">
-    A simple C++ lib for testing syncronization mechanisms.
+    <em>A simple C++ lib for testing syncronization mechanisms.</em>
   </p>
 </div>
 
@@ -129,8 +129,6 @@ I'm writing 3!
 
 If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br />Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
-
-
 ## License
 
 Distributed under the MIT License. See LICENSE.txt for more information.
@@ -141,8 +139,6 @@ The documentation is available at the following link: https://sernior.github.io/
 ## Contacts
 
 Federico Abrignani - federignoli@hotmail.it
-
-
 
 ## Authors and Contributors
 

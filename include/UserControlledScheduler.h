@@ -1,3 +1,15 @@
+/**
+ * @file UserControlledScheduler.h
+ * @author F. Abrignani (federignoli@hotmail.it)
+ * @author P. Di Giglio
+ * @author S. Martorana
+ * @brief 
+ * @version 1.4.5
+ * @date 2023-08-14
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #pragma once
 #include <DeterministicConcurrency>
 #include <cstddef>
@@ -21,16 +33,27 @@ namespace DeterministicConcurrency{
 
         public:
 
-        /**
-         * @brief Construct a UserControlledScheduler controlling N threads.
-         */
+        /// @private
         template <typename... Tuples>
         UserControlledScheduler(Tuples&&... tuples)
             : UserControlledScheduler{std::index_sequence_for<Tuples...>{},
                                 static_cast<Tuples&&>(tuples)...} {}
 
         /**
-         * @brief Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the resolution for S == WAITING_EXTERNAL.
+         * @brief Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the resolution for S == WAITING_EXTERNAL.#TODO
+         * 
+         * @tparam S 
+         * @tparam Args 
+         * @param threadIndixes param
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<thread_status_t S, typename... Args>
         void waitUntilAllThreadStatus(Args&&... threadIndixes){
@@ -45,6 +68,21 @@ namespace DeterministicConcurrency{
             return;
         }
 
+        /**
+         * @brief #TODO
+         * 
+         * @tparam BasicLockable 
+         * @param lockable 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
+         */
         template<typename BasicLockable>
         void waitUntilLocked(BasicLockable* lockable){
             while (lockable->try_lock()){
@@ -54,7 +92,21 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.
+         * @brief Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.#TODO
+         * 
+         * @tparam S 
+         * @tparam Args 
+         * @param threadIndixes 
+         * @return size_t 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<thread_status_t S, typename... Args>
         size_t waitUntilOneThreadStatus(Args&&... threadIndixes){
@@ -70,7 +122,19 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back.
+         * @brief Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back.#TODO
+         * 
+         * @tparam Args 
+         * @param threadIndixes 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<typename... Args>
         void switchContextTo(Args&&... threadIndixes){
@@ -81,14 +145,35 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back.
+         * @brief Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back.#TODO
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         void switchContextAll(){
             switchContextAll(std::make_index_sequence<N>());
         }
 
         /**
-         * @brief Perform a join on the threads with threadIndixes.
+         * @brief Perform a join on the threads with threadIndixes.#TODO
+         * 
+         * @tparam Args 
+         * @param threadIndixes 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<typename... Args>
         void joinOn(Args&&... threadIndixes){
@@ -97,7 +182,16 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Perform a join on all threads
+         * @brief Perform a join on all threads.
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         void joinAll(){
             for (auto& _thread : _threads)
@@ -105,7 +199,19 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Tick threadIndixes threads, allowing them to continue if they were in WAITING status.
+         * @brief Tick threadIndixes threads, allowing them to continue if they were in WAITING status.#TODO
+         * 
+         * @tparam Args 
+         * @param threadIndixes 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<typename... Args>
         void proceed(Args&&... threadIndixes){
@@ -114,7 +220,19 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Wait until the threads with threadIndixes go into WAITING status.
+         * @brief Wait until the threads with threadIndixes go into WAITING status.#TODO
+         * 
+         * @tparam Args 
+         * @param threadIndixes 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<typename... Args>
         void wait(Args&&... threadIndixes){
@@ -126,7 +244,16 @@ namespace DeterministicConcurrency{
          * @brief Get the Thread Status object. #TODO
          * 
          * @param threadIndixes 
-         * @return thread_status_t 
+         * @return thread_status_t
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode 
          */
         thread_status_t getThreadStatus(size_t threadIndixes){
             return _contexts[threadIndixes].thread_status_v;

@@ -4,7 +4,7 @@
 
 <table style="border:none;border-collapse:collapse;">
     <tr>
-        <td style="border:none;border-left:none;border-top:none;border-bottom:none;width: 80px;"> <img src="warning-nobackground.png" style= "width:70px; height:70px; object-fit: cover; object-position: 100% 0;"/>
+        <td style="border:none;border-left:none;border-top:none;border-bottom:none;width: 80px;"> <img src="warning.png" style= "width:70px; height:70px; object-fit: cover; object-position: 100% 0;"/>
         </td>
         <td style="border-right:none;border-top: none;border-bottom: none;"> 
         Tool made to test syncronization mechanisms in a deterministic way that does not rely on OS scheduler.<br>

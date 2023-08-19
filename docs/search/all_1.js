@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['finished_0',['FINISHED',['../namespaceDeterministicConcurrency.html#a1a2724fbacd89267f492f6a5ccafda8ea2c616b2713e2e0aed04b4c4752c88133',1,'DeterministicConcurrency']]]
+  ['getthreadstatus_0',['getThreadStatus',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0',1,'DeterministicConcurrency::UserControlledScheduler']]]
 ];

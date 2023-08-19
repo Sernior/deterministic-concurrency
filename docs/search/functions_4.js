@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['main_0',['main',['../test_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'test.cpp']]],
-  ['make_5fusercontrolledscheduler_1',['make_UserControlledScheduler',['../namespaceDeterministicConcurrency.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e',1,'DeterministicConcurrency']]]
+  ['switchcontext_0',['switchContext',['../classDeterministicConcurrency_1_1thread__context.html#a0a7391dcb6a66e255b088c5c95809627',1,'DeterministicConcurrency::thread_context']]],
+  ['switchcontextall_1',['switchContextAll',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116',1,'DeterministicConcurrency::UserControlledScheduler']]],
+  ['switchcontextto_2',['switchContextTo',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05',1,'DeterministicConcurrency::UserControlledScheduler']]]
 ];

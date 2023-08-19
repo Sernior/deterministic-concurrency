@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['proceed_0',['proceed',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f',1,'DeterministicConcurrency::UserControlledScheduler']]]
+  ['tick_0',['tick',['../classDeterministicConcurrency_1_1DeterministicThread.html#a0acf60945d2bdf4f445108d0ebfaf117',1,'DeterministicConcurrency::DeterministicThread']]]
 ];

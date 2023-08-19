@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['proceed_0',['proceed',['../classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f',1,'DeterministicConcurrency::UserControlledScheduler']]]
+  ['usercontrolledscheduler_0',['UserControlledScheduler',['../classDeterministicConcurrency_1_1UserControlledScheduler.html',1,'DeterministicConcurrency']]],
+  ['usercontrolledscheduler_2eh_1',['UserControlledScheduler.h',['../UserControlledScheduler_8h.html',1,'']]]
 ];

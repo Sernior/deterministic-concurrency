@@ -1,3 +1,15 @@
+/**
+ * @file DeterministicThread.h
+ * @author F. Abrignani (federignoli@hotmail.it)
+ * @author P. Di Giglio
+ * @author S. Martorana
+ * @brief 
+ * @version 1.4.5
+ * @date 2023-08-14
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #pragma once
 #include <DeterministicConcurrency>
 #include <thread>
@@ -47,6 +59,15 @@ namespace DeterministicConcurrency{
          * @tparam Args 
          * @param lockable 
          * @param args 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<typename BasicLockable, typename... Args>
         void lock(BasicLockable* lockable, Args&&... args){
@@ -72,6 +93,15 @@ namespace DeterministicConcurrency{
          * @tparam Args 
          * @param lockable 
          * @param args 
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         template<typename BasicLockable, typename... Args>
         void lock_shared(BasicLockable* lockable, Args&&... args){
@@ -92,17 +122,13 @@ namespace DeterministicConcurrency{
 
         private:
 
-        /**
-         * @brief #TODO
-         * 
-         */
+        /// @brief 
+        /// @private
         friend class DeterministicThread;
 
-        /**
-         * @brief #TODO
-         * 
-         * @tparam N 
-         */
+        /// @brief 
+        /// @tparam N 
+        /// @private
         template<size_t N>
         friend class UserControlledScheduler;
 
@@ -157,15 +183,7 @@ namespace DeterministicConcurrency{
      */
     class DeterministicThread {
     public:
-        /**
-         * @brief Construct a new Deterministic Thread object. #TODO
-         * 
-         * @tparam Func 
-         * @tparam Args 
-         * @param t 
-         * @param func 
-         * @param args 
-         */
+        /// @private
         template <typename Func, typename... Args>
         explicit DeterministicThread(thread_context* t ,Func&& func, Args&&... args)
             : _thread([function = std::forward<Func>(func), t, tuple = std::make_tuple(std::forward<Args>(args)...)]() mutable {
@@ -178,6 +196,14 @@ namespace DeterministicConcurrency{
         /**
          * @brief #TODO
          * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         void join() {
             _thread.join();
@@ -185,6 +211,15 @@ namespace DeterministicConcurrency{
 
         /**
          * @brief Allow the thread to proceed its execution
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         void tick() {
             {
@@ -197,6 +232,15 @@ namespace DeterministicConcurrency{
 
         /**
          * @brief Wait until the thread notify the scheduler
+         * 
+         * example:
+         * \code{.cpp}
+         * void my_function(my_namespace::my_class my_instance) {
+         *     //...do something
+         *     my_instance.my_method();
+         *     //...do something
+         * };
+         * \endcode
          */
         void wait_for_tock(){
             std::unique_lock<std::mutex> lock(_this_thread->control_mutex);
