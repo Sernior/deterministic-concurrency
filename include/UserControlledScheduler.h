@@ -124,14 +124,14 @@ namespace DeterministicConcurrency{
         /**
          * @brief Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back.#TODO
          * 
-         * @tparam Args 
-         * @param threadIndixes 
+         * @tparam Args : describe Args
+         * @param threadIndixes : describe threadIndixes
          * 
-         * example:
+         * example of switchContextTo:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
+         * DeterministicConcurrency::UserControlledScheduler ) {
          *     //...do something
-         *     my_instance.my_method();
+         *     sch.switchContextTo();
          *     //...do something
          * };
          * \endcode
@@ -284,6 +284,34 @@ namespace DeterministicConcurrency{
         std::array<DeterministicThread, N> _threads;
     };
 
+    /**
+     * @brief describe make_UserControlledScheduler#TODO
+     * 
+     * @tparam Tuples 
+     * @param tuples 
+     * @return UserControlledScheduler 
+     * 
+     * example of `make_UserControlledScheduler()`:
+     * \code{.cpp}
+     * #include <DeterministicConcurrency>
+     * 
+     * void thread_function(DeterministicConcurrency::thread_context* c, uint32_t a) {
+     *      //...do something
+     * }
+     * 
+     * void main() {
+     *     //...do something
+     *     auto thread_0 = std::tuple{&thread_function, 0};
+     * 
+     *     auto sch = DeterministicConcurrency::make_UserControlledScheduler(
+     *         thread_0
+     *     );
+     *     //...do something
+     *     sch.joinAll();
+     * }
+     *  
+     * \endcode 
+     */
     template<typename... Tuples>
     auto make_UserControlledScheduler(Tuples&&... tuples) {
         return UserControlledScheduler<sizeof...(Tuples)>(static_cast<Tuples&&>(tuples)...);

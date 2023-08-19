@@ -18,6 +18,10 @@
 #include <tuple>
 
 namespace DeterministicConcurrency{
+    /**
+     * @brief describe the thread status#TODO
+     * 
+     */
     enum class thread_status_t{
         RUNNING,
         WAITING,
@@ -29,8 +33,32 @@ namespace DeterministicConcurrency{
     class DeterministicThread;
 
     /**
-     * @brief #TODO
+     * @brief Provide the thread with basic functionalities.
      * 
+     * Use case of `thread_context`:
+     * \code{.cpp}
+     * #include <mutex>
+     * 
+     * static std::mutex m;
+     * 
+     * void my_function(DeterministicConcurrency::thread_context* c) {
+     *     //...do something
+     *     c->lock(&m);
+     *     //...do something         // ...critical section
+     *     c->switchContext();       // ...
+     *     //...do something         // ...
+     *     m.unlock();
+     *     //...do something
+     * };
+     * \endcode
+     * 
+     * #### Explanation:
+     * 
+     * `lock(&m)` lock the `thread_context` on the `m` mutex;
+     * 
+     * `switchContext()` switch the context back to the scheduler;
+     * 
+     * `unlock()` unlock the `m` mutex.
      */
     class thread_context {
     public:
@@ -39,6 +67,7 @@ namespace DeterministicConcurrency{
         /**
          * @brief Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back.
          * 
+         * Example of `switchContext()`:
          * \code{.cpp}
          * void my_function(DeterministicConcurrency::thread_context* c) {
          *     //...do something
@@ -53,18 +82,22 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief #TODO
+         * @brief Lock \p lockable and update the current \p thread_status_v of the current `deterministic thread`.
          * 
-         * @tparam BasicLockable 
-         * @tparam Args 
-         * @param lockable 
-         * @param args 
+         * @param lockable : a lockable object like a mutex.
+         * @param args : arguments that will be forwarded to the .lock().
          * 
-         * example:
+         * Example of `lock()`:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
+         * #include <mutex>
+         * 
+         * static std::mutex m;
+         * 
+         * void my_function(DeterministicConcurrency::thread_context* c) {
          *     //...do something
-         *     my_instance.my_method();
+         *     c->lock(&m);
+         *     //...critical section
+         *     m.unlock();
          *     //...do something
          * };
          * \endcode
@@ -87,18 +120,22 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief #TODO
+         * @brief Lock \p lockable in shared mode and update the current \p thread_status_v of the current `deterministic thread`.
          * 
-         * @tparam BasicLockable 
-         * @tparam Args 
-         * @param lockable 
-         * @param args 
+         * @param lockable : a lockable object like a mutex.
+         * @param args : arguments that will be forwarded to the .lock_shared().
          * 
-         * example:
+         * Example of `lock_shared()`:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
+         * #include <mutex>
+         * 
+         * static std::mutex m;
+         * 
+         * void my_function(DeterministicConcurrency::thread_context* c) {
          *     //...do something
-         *     my_instance.my_method();
+         *     c->lock_shared(&m);
+         *     //...critical section
+         *     m.unlock_shared();
          *     //...do something
          * };
          * \endcode
