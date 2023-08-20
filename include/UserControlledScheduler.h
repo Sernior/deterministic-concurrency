@@ -22,7 +22,7 @@
 namespace DeterministicConcurrency{
 
     /**
-     * @brief #TODO
+     * @brief A scheduler which allow to manage the flow of its managed threads.
      * 
      * @tparam N 
      */
@@ -40,19 +40,14 @@ namespace DeterministicConcurrency{
                                 static_cast<Tuples&&>(tuples)...} {}
 
         /**
-         * @brief Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the resolution for S == WAITING_EXTERNAL.#TODO
+         * @brief Wait until all of the threadIndixes threads have thread_status_v equal to S
          * 
-         * @tparam S 
-         * @tparam Args 
-         * @param threadIndixes param
+         * @tparam S : The thread_status_t waitUntilAllThreadStatus will wait until
+         * @param threadIndixes : Indixes of the threads to perform waitUntilAllThreadStatus on
          * 
-         * example:
+         * wait until threads 0, 1, 2 and 3 reach status WAITING:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(0,1,2,3);
          * \endcode
          */
         template<thread_status_t S, typename... Args>
@@ -69,22 +64,19 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief #TODO
+         * @brief Wait until lockable is owned
          * 
          * @tparam BasicLockable 
          * @param lockable 
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * std:mutex m;
+         * sch.waitUntilLocked(&m);
          * \endcode
          */
         template<typename BasicLockable>
-        void waitUntilLocked(BasicLockable* lockable){
+        static void waitUntilLocked(BasicLockable* lockable){
             while (lockable->try_lock()){
                 lockable->unlock();
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -92,20 +84,15 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.#TODO
+         * @brief Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.
          * 
-         * @tparam S 
-         * @tparam Args 
-         * @param threadIndixes 
-         * @return size_t 
+         * @tparam S : The thread_status_t waitUntilOneThreadStatus will wait until
+         * @param threadIndixes : Indixes of the threads to perform waitUntilOneThreadStatus on
+         * @return size_t : the index of the first thread who reached thread_status_t S
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * auto index = sch.waitUntilOneThreadStatus<thread_status_t::WAITING>(0,1,2,3);
          * \endcode
          */
         template<thread_status_t S, typename... Args>
@@ -122,18 +109,13 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back.#TODO
+         * @brief Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all threads switchContext back.
          * 
-         * @tparam Args : describe Args
-         * @param threadIndixes : describe threadIndixes
+         * @param threadIndixes : Indixes of the threads to perform switchContextTo on
          * 
          * example of switchContextTo:
          * \code{.cpp}
-         * DeterministicConcurrency::UserControlledScheduler ) {
-         *     //...do something
-         *     sch.switchContextTo();
-         *     //...do something
-         * };
+         * sch.switchContextTo(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
@@ -145,15 +127,11 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back.#TODO
+         * @brief Switch context allowing all the threads to proceed while stopping the scheduler from executing until all of the threads switchContext back.
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * sch.switchContextAll();
          * \endcode
          */
         void switchContextAll(){
@@ -161,18 +139,13 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Perform a join on the threads with threadIndixes.#TODO
+         * @brief Perform a join on the threads with threadIndixes.
          * 
-         * @tparam Args 
-         * @param threadIndixes 
+         * @param threadIndixes : Indixes of the threads to perform joinOn on
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * sch.joinOn(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
@@ -186,11 +159,7 @@ namespace DeterministicConcurrency{
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * sch.joinAll();
          * \endcode
          */
         void joinAll(){
@@ -199,18 +168,13 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Tick threadIndixes threads, allowing them to continue if they were in WAITING status.#TODO
+         * @brief Allow threadIndixes to continue while not stopping the scheduler thread.
          * 
-         * @tparam Args 
-         * @param threadIndixes 
+         * @param threadIndixes : Indixes of the threads to perform proceed on
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * sch.proceed(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
@@ -220,18 +184,13 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Wait until the threads with threadIndixes go into WAITING status.#TODO
+         * @brief Wait until the threads with threadIndixes go into WAITING status.
          * 
-         * @tparam Args 
-         * @param threadIndixes 
+         * @param threadIndixes : Indixes of the threads to perform wait on
          * 
          * example:
          * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
+         * sch.wait(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
@@ -241,22 +200,13 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Get the Thread Status object. #TODO
+         * @brief Get the Thread Status of the thread with threadIndex.
          * 
-         * @param threadIndixes 
-         * @return thread_status_t
-         * 
-         * example:
-         * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
-         * \endcode 
+         * @param threadIndex Obtain the thread_status of the thread identified by threadIndex.
+         * @return thread_status_t : the status of the threadIndex-th thread.
          */
-        thread_status_t getThreadStatus(size_t threadIndixes){
-            return _contexts[threadIndixes].thread_status_v;
+        thread_status_t getThreadStatus(size_t threadIndex){
+            return _contexts[threadIndex].thread_status_v;
         }
 
         private:
@@ -285,31 +235,18 @@ namespace DeterministicConcurrency{
     };
 
     /**
-     * @brief describe make_UserControlledScheduler#TODO
+     * @brief Helper function to create an UserControlledScheduler
      * 
-     * @tparam Tuples 
-     * @param tuples 
+     * @param tuples : tuples containing the function the threads have to performs followed by their arguments.
      * @return UserControlledScheduler 
      * 
      * example of `make_UserControlledScheduler()`:
      * \code{.cpp}
-     * #include <DeterministicConcurrency>
-     * 
-     * void thread_function(DeterministicConcurrency::thread_context* c, uint32_t a) {
-     *      //...do something
-     * }
-     * 
-     * void main() {
-     *     //...do something
-     *     auto thread_0 = std::tuple{&thread_function, 0};
-     * 
-     *     auto sch = DeterministicConcurrency::make_UserControlledScheduler(
-     *         thread_0
-     *     );
-     *     //...do something
-     *     sch.joinAll();
-     * }
-     *  
+     * void f(thread_context* c, int a){}
+     * void h(thread_context* c, string a){} 
+     * auto thread0 = tuple{&f, 3};
+     * auto thread1 = tuple{&f, "aaa"};
+     * auto sch = make_UserControlledScheduler(thread0, thread1);
      * \endcode 
      */
     template<typename... Tuples>

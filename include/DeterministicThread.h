@@ -215,7 +215,7 @@ namespace DeterministicConcurrency{
     };
 
     /**
-     * @brief #TODO
+     * @brief A thread controlled by the UserControlledScheduler
      * 
      */
     class DeterministicThread {
@@ -231,16 +231,7 @@ namespace DeterministicConcurrency{
             , _this_thread(t) {}
 
         /**
-         * @brief #TODO
-         * 
-         * example:
-         * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
-         * \endcode
+         * @brief Join this this thread
          */
         void join() {
             _thread.join();
@@ -248,15 +239,6 @@ namespace DeterministicConcurrency{
 
         /**
          * @brief Allow the thread to proceed its execution
-         * 
-         * example:
-         * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
-         * \endcode
          */
         void tick() {
             {
@@ -269,15 +251,6 @@ namespace DeterministicConcurrency{
 
         /**
          * @brief Wait until the thread notify the scheduler
-         * 
-         * example:
-         * \code{.cpp}
-         * void my_function(my_namespace::my_class my_instance) {
-         *     //...do something
-         *     my_instance.my_method();
-         *     //...do something
-         * };
-         * \endcode
          */
         void wait_for_tock(){
             std::unique_lock<std::mutex> lock(_this_thread->control_mutex);
