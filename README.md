@@ -36,12 +36,12 @@
 
 ## About The Project
 
-Concurrency testing often poses challenges due to the `non-deterministic` nature of threads and synchronization mechanisms. The `DeterministicConcurrency` library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.<br />
+Concurrency testing often poses challenges due to the <span style="color: darkgoldenrod;">non-deterministic</span> nature of threads and synchronization mechanisms. The `DeterministicConcurrency` library aims to address these challenges by providing tools to create and manage deterministic concurrency scenarios, enabling precise and reliable testing.<br />
 While primarily designed for testing, the `UserControlledScheduler` can also serve as a framework to create synchronized thread pool-like structures for broader multithread applications.
 
 The assumptions are:
-  - `UserControlledScheduler` automatically creates a number of `std::threads` equal to the number of arguments you pass its constructor; these `threads` are lazy and each one of them must be allowed to terminate by the `UserControlledScheduler`. 
-  - To allow a `thread` to finish, the `UserControlledScheduler` must allow these `threads` to proceed until they are in a `joinable` state.
+  - `UserControlledScheduler` automatically creates a number of `std::thread` equal to the number of arguments you pass its constructor; these <span style="color: darkgoldenrod;">threads</span> are lazy and each one of them must be allowed to terminate by the `UserControlledScheduler`. 
+  - To allow a <span style="color: darkgoldenrod;">thread</span> to finish, the `UserControlledScheduler` must allow these <span style="color: darkgoldenrod;">threads</span> to proceed until they are in a <span style="color: darkgoldenrod;">joinable</span> state.
 
 ## Getting Started
 ### Prerequisites

@@ -3,7 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
- * @brief Contains the definition of DeterministicThread and thread_context
+ * @brief Contains the definition of DeterministicThread and thread_context.
  * @version 1.4.5
  * @date 2023-08-14
  * 
@@ -19,7 +19,7 @@
 
 namespace DeterministicConcurrency{
     /**
-     * @brief Enum describing the possible states of a thread
+     * @brief Enum describing the possible states of a thread.
      * 
      */
     enum class thread_status_t{
@@ -34,6 +34,8 @@ namespace DeterministicConcurrency{
 
     /**
      * @brief Provide the thread with basic functionalities.
+     * 
+     * #### Example:
      * 
      * Use case of `thread_context`:
      * \code{.cpp}
@@ -54,11 +56,11 @@ namespace DeterministicConcurrency{
      * 
      * #### Explanation:
      * 
-     * `lock(&m)` lock the `thread_context` on the `m` mutex;
+     * - `lock(&m)` lock the `thread_context` on the `m` mutex;
      * 
-     * `switchContext()` switch the context back to the scheduler;
+     * - `switchContext()` switch the context back to the scheduler;
      * 
-     * `unlock()` unlock the `m` mutex.
+     * - `unlock()` unlock the `m` mutex.
      */
     class thread_context {
     public:
@@ -66,6 +68,8 @@ namespace DeterministicConcurrency{
 
         /**
          * @brief Notify the scheduler that this thread is ready to give it back the control and wait until the scheduler notify back.
+         * 
+         * #### Example:
          * 
          * Example of `switchContext()`:
          * \code{.cpp}
@@ -86,6 +90,8 @@ namespace DeterministicConcurrency{
          * 
          * @param lockable : a lockable object like a mutex.
          * @param args : arguments that will be forwarded to the .lock().
+         * 
+         * #### Example:
          * 
          * Example of `lock()`:
          * \code{.cpp}
@@ -124,6 +130,8 @@ namespace DeterministicConcurrency{
          * 
          * @param lockable : a lockable object like a mutex.
          * @param args : arguments that will be forwarded to the .lock_shared().
+         * 
+         * #### Example:
          * 
          * Example of `lock_shared()`:
          * \code{.cpp}
@@ -216,6 +224,7 @@ namespace DeterministicConcurrency{
 
     /**
      * @brief A thread controlled by the UserControlledScheduler
+     * @private
      */
     class DeterministicThread {
     public:

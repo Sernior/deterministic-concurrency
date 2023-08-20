@@ -110,160 +110,159 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">namespace </span>DeterministicConcurrency{</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N&gt;</div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">   30</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>{</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keyword">struct </span>emplace_t {};</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tuples&gt;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>(Tuples&amp;&amp;... tuples)</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            : <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>{std::index_sequence_for&lt;Tuples...&gt;{},</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                                <span class="keyword">static_cast&lt;</span>Tuples&amp;&amp;<span class="keyword">&gt;</span>(tuples)...} {}</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keyword">template</span>&lt;<a class="code hl_enumeration" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5ade605e91b79c39522d71b25cc34b9d">   59</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5ade605e91b79c39522d71b25cc34b9d">waitUntilAllThreadStatus</a>(Args&amp;&amp;... threadIndixes){</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> numThreads = 0; numThreads != <span class="keyword">sizeof</span>...(threadIndixes);){</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                numThreads = 0;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                ([&amp;]{</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0">getThreadStatus</a>(threadIndixes) == S)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                        numThreads++;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                }(),...);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N&gt;</div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">   29</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">struct </span>emplace_t {};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tuples&gt;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>(Tuples&amp;&amp;... tuples)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            : <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>{std::index_sequence_for&lt;Tuples...&gt;{},</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                                <span class="keyword">static_cast&lt;</span>Tuples&amp;&amp;<span class="keyword">&gt;</span>(tuples)...} {}</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keyword">template</span>&lt;<a class="code hl_enumeration" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acf9c8f15e794b319a53ea91507b9a2e1">   54</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acf9c8f15e794b319a53ea91507b9a2e1">waitUntilAllThreadStatus</a>(Args&amp;&amp;... threadIndexes){</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> numThreads = 0; numThreads != <span class="keyword">sizeof</span>...(threadIndexes);){</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                numThreads = 0;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                ([&amp;]{</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a88523996ed3f1365140bb35534745b29">getThreadStatus</a>(threadIndexes) == S)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                        numThreads++;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                }(),...);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> BasicLockable&gt;</div>
-<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a28c0ba34dd04660c0102f0028edcbd70">   87</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a28c0ba34dd04660c0102f0028edcbd70">waitUntilLocked</a>(BasicLockable* lockable){</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">while</span> (lockable-&gt;try_lock()){</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                lockable-&gt;unlock();</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            }</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> BasicLockable&gt;</div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a939add603d089b7144a30dec1db017d6">   79</a></span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a939add603d089b7144a30dec1db017d6">waitUntilLocked</a>(BasicLockable* lockable){</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">while</span> (lockable-&gt;try_lock()){</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                lockable-&gt;unlock();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
 </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keyword">template</span>&lt;<a class="code hl_enumeration" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5a7a3cedbcde50acac05edc549a050ff">  112</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5a7a3cedbcde50acac05edc549a050ff">waitUntilOneThreadStatus</a>(Args&amp;&amp;... threadIndixes){</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordtype">size_t</span> threadIndex = -1;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="keywordflow">for</span> (;threadIndex == -1;){</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                ([&amp;]{</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0">getThreadStatus</a>(threadIndixes) == S)</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                        threadIndex = threadIndixes;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                }(),...);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">return</span> threadIndex;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">template</span>&lt;<a class="code hl_enumeration" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a68c8ada3df680dfce3c15bef6a161064">   99</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a68c8ada3df680dfce3c15bef6a161064">waitUntilOneThreadStatus</a>(Args&amp;&amp;... threadIndexes){</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordtype">size_t</span> threadIndex = -1;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">for</span> (;threadIndex == -1;){</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                std::this_thread::sleep_for(std::chrono::milliseconds(1));</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                ([&amp;]{</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a88523996ed3f1365140bb35534745b29">getThreadStatus</a>(threadIndexes) == S)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        threadIndex = threadIndexes;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                }(),...);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">return</span> threadIndex;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05">  140</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05">switchContextTo</a>(Args&amp;&amp;... threadIndixes){</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            ([&amp;]{</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f">proceed</a>(threadIndixes);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f">wait</a>(threadIndixes);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            }(),...);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acc3d3ca561e743bb9051f758ac1dd0c4">  123</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acc3d3ca561e743bb9051f758ac1dd0c4">switchContextTo</a>(Args&amp;&amp;... threadIndexes){</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            ([&amp;]{</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a38aad08c72765b36b090171e7bba8539">proceed</a>(threadIndexes);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a515cb6f198d67d9175cfcf7c748fc997">wait</a>(threadIndexes);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            }(),...);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
 </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">  159</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a>(){</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a>(std::make_index_sequence&lt;N&gt;());</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">  138</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a>(){</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a>(std::make_index_sequence&lt;N&gt;());</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        }</div>
 </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="foldopen" id="foldopen00179" data-start="{" data-end="}">
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#abbddea358e9ece84cefbf383ed59bb2e">  179</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#abbddea358e9ece84cefbf383ed59bb2e">joinOn</a>(Args&amp;&amp;... threadIndixes){</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(threadIndixes) &lt;= N, <span class="stringliteral">&quot;Too many args&quot;</span>);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            (_threads[threadIndixes].join(), ...);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a1633deac1bb4704bb00d1324afe02393">  153</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a1633deac1bb4704bb00d1324afe02393">joinOn</a>(Args&amp;&amp;... threadIndexes){</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(threadIndexes) &lt;= N, <span class="stringliteral">&quot;Too many args&quot;</span>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            (_threads[threadIndexes].join(), ...);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        }</div>
 </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="foldopen" id="foldopen00196" data-start="{" data-end="}">
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">  196</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">joinAll</a>(){</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; _thread : _threads)</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                _thread.join();</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">  166</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">joinAll</a>(){</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; _thread : _threads)</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                _thread.join();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        }</div>
 </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f">  217</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f">proceed</a>(Args&amp;&amp;... threadIndixes){</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(threadIndixes) &lt;= N, <span class="stringliteral">&quot;Too many args&quot;</span>);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            (_threads[threadIndixes].tick(), ...);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a38aad08c72765b36b090171e7bba8539">  182</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a38aad08c72765b36b090171e7bba8539">proceed</a>(Args&amp;&amp;... threadIndexes){</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(threadIndexes) &lt;= N, <span class="stringliteral">&quot;Too many args&quot;</span>);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            (_threads[threadIndexes].tick(), ...);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        }</div>
 </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="foldopen" id="foldopen00238" data-start="{" data-end="}">
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f">  238</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f">wait</a>(Args&amp;&amp;... threadIndixes){</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(threadIndixes) &lt;= N, <span class="stringliteral">&quot;Too many args&quot;</span>);</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            (_threads[threadIndixes].wait_for_tock(), ...);</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        }</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a515cb6f198d67d9175cfcf7c748fc997">  198</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a515cb6f198d67d9175cfcf7c748fc997">wait</a>(Args&amp;&amp;... threadIndexes){</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>...(threadIndexes) &lt;= N, <span class="stringliteral">&quot;Too many args&quot;</span>);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            (_threads[threadIndexes].wait_for_tock(), ...);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        }</div>
 </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="foldopen" id="foldopen00258" data-start="{" data-end="}">
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0">  258</a></span>        <a class="code hl_enumeration" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0">getThreadStatus</a>(<span class="keywordtype">size_t</span> threadIndixes){</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">return</span> _contexts[threadIndixes].thread_status_v;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        }</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a88523996ed3f1365140bb35534745b29">  209</a></span>        <a class="code hl_enumeration" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a88523996ed3f1365140bb35534745b29">getThreadStatus</a>(<span class="keywordtype">size_t</span> threadIndex){</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            <span class="keywordflow">return</span> _contexts[threadIndex].thread_status_v;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        }</div>
 </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tuples&gt;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>(emplace_t, Tuples&amp;&amp;... tuples)</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            : _threads{std::make_from_tuple&lt;<a class="code hl_class" href="classDeterministicConcurrency_1_1DeterministicThread.html">DeterministicThread</a>&gt;(tuples)...} {}</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tuples, std::size_t... Is&gt;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        UserControlledScheduler(std::index_sequence&lt;Is...&gt;, Tuples&amp;&amp;... tuples)</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            : UserControlledScheduler{</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                emplace_t{}, std::tuple_cat(std::tuple{&amp;std::get&lt;Is&gt;(_contexts)},</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                                            static_cast&lt;Tuples&amp;&amp;&gt;(tuples))...} {}</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keyword">template</span> &lt;std::size_t... Is&gt;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a>(std::index_sequence&lt;Is...&gt;){</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            ([&amp;]{</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f">proceed</a>(Is);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f">wait</a>(Is);</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            }(),...);</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        }</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        std::array&lt;thread_context, N&gt; _contexts;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        std::array&lt;DeterministicThread, N&gt; _threads;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    };</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tuples&gt;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>(emplace_t, Tuples&amp;&amp;... tuples)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            : _threads{std::make_from_tuple&lt;DeterministicThread&gt;(tuples)...} {}</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Tuples, std::size_t... Is&gt;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        UserControlledScheduler(std::index_sequence&lt;Is...&gt;, Tuples&amp;&amp;... tuples)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            : UserControlledScheduler{</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                emplace_t{}, std::tuple_cat(std::tuple{&amp;std::get&lt;Is&gt;(_contexts)},</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                                            static_cast&lt;Tuples&amp;&amp;&gt;(tuples))...} {}</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keyword">template</span> &lt;std::size_t... Is&gt;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a>(std::index_sequence&lt;Is...&gt;){</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            ([&amp;]{</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a38aad08c72765b36b090171e7bba8539">proceed</a>(Is);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                <a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a515cb6f198d67d9175cfcf7c748fc997">wait</a>(Is);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            }(),...);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        }</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        std::array&lt;thread_context, N&gt; _contexts;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        std::array&lt;DeterministicThread, N&gt; _threads;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    };</div>
 </div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Tuples&gt;</div>
-<div class="foldopen" id="foldopen00316" data-start="{" data-end="}">
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="UserControlledScheduler_8h.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e">  316</a></span>    <span class="keyword">auto</span> <a class="code hl_function" href="UserControlledScheduler_8h.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e">make_UserControlledScheduler</a>(Tuples&amp;&amp;... tuples) {</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>&lt;<span class="keyword">sizeof</span>...(Tuples)&gt;(<span class="keyword">static_cast&lt;</span>Tuples&amp;&amp;<span class="keyword">&gt;</span>(tuples)...);</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Tuples&gt;</div>
+<div class="foldopen" id="foldopen00255" data-start="{" data-end="}">
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="UserControlledScheduler_8h.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e">  255</a></span>    <span class="keyword">auto</span> <a class="code hl_function" href="UserControlledScheduler_8h.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e">make_UserControlledScheduler</a>(Tuples&amp;&amp;... tuples) {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">UserControlledScheduler</a>&lt;<span class="keyword">sizeof</span>...(Tuples)&gt;(<span class="keyword">static_cast&lt;</span>Tuples&amp;&amp;<span class="keyword">&gt;</span>(tuples)...);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    }</div>
 </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    </div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>}</div>
-<div class="ttc" id="aDeterministicThread_8h_html_a1a2724fbacd89267f492f6a5ccafda8e"><div class="ttname"><a href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">DeterministicConcurrency::thread_status_t</a></div><div class="ttdeci">thread_status_t</div><div class="ttdoc">describe the thread status::TODO</div><div class="ttdef"><b>Definition</b> DeterministicThread.h:25</div></div>
-<div class="ttc" id="aUserControlledScheduler_8h_html_a4f4fcaf92dfcd72b8bb9a998cdbd271e"><div class="ttname"><a href="UserControlledScheduler_8h.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e">DeterministicConcurrency::make_UserControlledScheduler</a></div><div class="ttdeci">auto make_UserControlledScheduler(Tuples &amp;&amp;... tuples)</div><div class="ttdoc">describe make_UserControlledScheduler::TODO</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:316</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1DeterministicThread_html"><div class="ttname"><a href="classDeterministicConcurrency_1_1DeterministicThread.html">DeterministicConcurrency::DeterministicThread</a></div><div class="ttdoc">#TODO</div><div class="ttdef"><b>Definition</b> DeterministicThread.h:221</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a></div><div class="ttdoc">#TODO</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:30</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a28c0ba34dd04660c0102f0028edcbd70"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a28c0ba34dd04660c0102f0028edcbd70">DeterministicConcurrency::UserControlledScheduler::waitUntilLocked</a></div><div class="ttdeci">void waitUntilLocked(BasicLockable *lockable)</div><div class="ttdoc">#TODO</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:87</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a3af28a8f67bb8f418c12741f7e6e8116"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">DeterministicConcurrency::UserControlledScheduler::switchContextAll</a></div><div class="ttdeci">void switchContextAll()</div><div class="ttdoc">Switch context allowing all the threads to proceed while stopping the scheduler from executing while ...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:159</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a424273768e35799c5d7397454c4b14d0"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0">DeterministicConcurrency::UserControlledScheduler::getThreadStatus</a></div><div class="ttdeci">thread_status_t getThreadStatus(size_t threadIndixes)</div><div class="ttdoc">Get the Thread Status object. #TODO.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:258</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a44513a71262668eb3b068e2c8f7a9b05"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05">DeterministicConcurrency::UserControlledScheduler::switchContextTo</a></div><div class="ttdeci">void switchContextTo(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from e...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:140</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a5a7a3cedbcde50acac05edc549a050ff"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5a7a3cedbcde50acac05edc549a050ff">DeterministicConcurrency::UserControlledScheduler::waitUntilOneThreadStatus</a></div><div class="ttdeci">size_t waitUntilOneThreadStatus(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the i...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:112</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a5ade605e91b79c39522d71b25cc34b9d"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5ade605e91b79c39522d71b25cc34b9d">DeterministicConcurrency::UserControlledScheduler::waitUntilAllThreadStatus</a></div><div class="ttdeci">void waitUntilAllThreadStatus(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the re...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:59</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a62ac43447104509cec55015b64db7115"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">DeterministicConcurrency::UserControlledScheduler::joinAll</a></div><div class="ttdeci">void joinAll()</div><div class="ttdoc">Perform a join on all threads.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:196</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_abbddea358e9ece84cefbf383ed59bb2e"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#abbddea358e9ece84cefbf383ed59bb2e">DeterministicConcurrency::UserControlledScheduler::joinOn</a></div><div class="ttdeci">void joinOn(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Perform a join on the threads with threadIndixes.#TODO.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:179</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_ac145c86ecfda1d2fc4785568ee1fc50f"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f">DeterministicConcurrency::UserControlledScheduler::wait</a></div><div class="ttdeci">void wait(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Wait until the threads with threadIndixes go into WAITING status.#TODO.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:238</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_ac75eea6ae663e8aa16b9b3c48b00490f"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f">DeterministicConcurrency::UserControlledScheduler::proceed</a></div><div class="ttdeci">void proceed(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Tick threadIndixes threads, allowing them to continue if they were in WAITING status....</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:217</div></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>}</div>
+<div class="ttc" id="aDeterministicThread_8h_html_a1a2724fbacd89267f492f6a5ccafda8e"><div class="ttname"><a href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">DeterministicConcurrency::thread_status_t</a></div><div class="ttdeci">thread_status_t</div><div class="ttdoc">Enum describing the possible states of a thread.</div><div class="ttdef"><b>Definition</b> DeterministicThread.h:25</div></div>
+<div class="ttc" id="aUserControlledScheduler_8h_html_a4f4fcaf92dfcd72b8bb9a998cdbd271e"><div class="ttname"><a href="UserControlledScheduler_8h.html#a4f4fcaf92dfcd72b8bb9a998cdbd271e">DeterministicConcurrency::make_UserControlledScheduler</a></div><div class="ttdeci">auto make_UserControlledScheduler(Tuples &amp;&amp;... tuples)</div><div class="ttdoc">Helper function to create an UserControlledScheduler.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:255</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a></div><div class="ttdoc">A scheduler which allow to manage the flow of its managed threads.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:29</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a1633deac1bb4704bb00d1324afe02393"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a1633deac1bb4704bb00d1324afe02393">DeterministicConcurrency::UserControlledScheduler::joinOn</a></div><div class="ttdeci">void joinOn(Args &amp;&amp;... threadIndexes)</div><div class="ttdoc">Perform a join on the threads with threadIndexes.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:153</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a38aad08c72765b36b090171e7bba8539"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a38aad08c72765b36b090171e7bba8539">DeterministicConcurrency::UserControlledScheduler::proceed</a></div><div class="ttdeci">void proceed(Args &amp;&amp;... threadIndexes)</div><div class="ttdoc">Allow threadIndexes to continue while not stopping the scheduler thread.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:182</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a3af28a8f67bb8f418c12741f7e6e8116"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">DeterministicConcurrency::UserControlledScheduler::switchContextAll</a></div><div class="ttdeci">void switchContextAll()</div><div class="ttdoc">Switch context allowing all the threads to proceed while stopping the scheduler from executing until ...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:138</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a515cb6f198d67d9175cfcf7c748fc997"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a515cb6f198d67d9175cfcf7c748fc997">DeterministicConcurrency::UserControlledScheduler::wait</a></div><div class="ttdeci">void wait(Args &amp;&amp;... threadIndexes)</div><div class="ttdoc">Wait until the threads with threadIndexes go into WAITING status.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:198</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a62ac43447104509cec55015b64db7115"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">DeterministicConcurrency::UserControlledScheduler::joinAll</a></div><div class="ttdeci">void joinAll()</div><div class="ttdoc">Perform a join on all threads.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:166</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a68c8ada3df680dfce3c15bef6a161064"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a68c8ada3df680dfce3c15bef6a161064">DeterministicConcurrency::UserControlledScheduler::waitUntilOneThreadStatus</a></div><div class="ttdeci">size_t waitUntilOneThreadStatus(Args &amp;&amp;... threadIndexes)</div><div class="ttdoc">Wait until at least one of the threadIndexes threads have thread_status_v equal to S and return the i...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:99</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a88523996ed3f1365140bb35534745b29"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a88523996ed3f1365140bb35534745b29">DeterministicConcurrency::UserControlledScheduler::getThreadStatus</a></div><div class="ttdeci">thread_status_t getThreadStatus(size_t threadIndex)</div><div class="ttdoc">Get the Thread Status of the thread with threadIndex.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:209</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a939add603d089b7144a30dec1db017d6"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a939add603d089b7144a30dec1db017d6">DeterministicConcurrency::UserControlledScheduler::waitUntilLocked</a></div><div class="ttdeci">static void waitUntilLocked(BasicLockable *lockable)</div><div class="ttdoc">Wait until lockable is owned.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:79</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_acc3d3ca561e743bb9051f758ac1dd0c4"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acc3d3ca561e743bb9051f758ac1dd0c4">DeterministicConcurrency::UserControlledScheduler::switchContextTo</a></div><div class="ttdeci">void switchContextTo(Args &amp;&amp;... threadIndexes)</div><div class="ttdoc">Switch context allowing the threads with threadIndexes to proceed while stopping the scheduler from e...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:123</div></div>
+<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_acf9c8f15e794b319a53ea91507b9a2e1"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acf9c8f15e794b319a53ea91507b9a2e1">DeterministicConcurrency::UserControlledScheduler::waitUntilAllThreadStatus</a></div><div class="ttdeci">void waitUntilAllThreadStatus(Args &amp;&amp;... threadIndexes)</div><div class="ttdoc">Wait until all of the threadIndexes threads have thread_status_v equal to S.</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:54</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.3-->
 <!-- start footer part -->

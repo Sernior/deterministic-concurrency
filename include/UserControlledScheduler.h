@@ -3,7 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
- * @brief Contains the definition of the UserControlledScheduler
+ * @brief Contains the definition of the UserControlledScheduler.
  * @version 1.4.5
  * @date 2023-08-14
  * 
@@ -24,7 +24,6 @@ namespace DeterministicConcurrency{
     /**
      * @brief A scheduler which allow to manage the flow of its managed threads.
      * 
-     * @tparam N 
      */
     template<size_t N>
     class UserControlledScheduler{
@@ -40,23 +39,24 @@ namespace DeterministicConcurrency{
                                 static_cast<Tuples&&>(tuples)...} {}
 
         /**
-         * @brief Wait until all of the threadIndixes threads have thread_status_v equal to S
+         * @brief Wait until all of the threadIndexes threads have thread_status_v equal to S.
          * 
-         * @tparam S : The thread_status_t waitUntilAllThreadStatus will wait until
-         * @param threadIndixes : Indixes of the threads to perform waitUntilAllThreadStatus on
+         * @tparam S : thread_status_t to wait until.
+         * @param threadIndexes : Indexes of the threads to perform waitUntilAllThreadStatus() on.
          * 
-         * wait until threads 0, 1, 2 and 3 reach status WAITING:
+         * #### Example:
+         * Wait until threads 0, 1, 2 and 3 reach status WAITING:
          * \code{.cpp}
          * sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(0,1,2,3);
          * \endcode
          */
         template<thread_status_t S, typename... Args>
-        void waitUntilAllThreadStatus(Args&&... threadIndixes){
-            for(size_t numThreads = 0; numThreads != sizeof...(threadIndixes);){
+        void waitUntilAllThreadStatus(Args&&... threadIndexes){
+            for(size_t numThreads = 0; numThreads != sizeof...(threadIndexes);){
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 numThreads = 0;
                 ([&]{
-                    if (getThreadStatus(threadIndixes) == S)
+                    if (getThreadStatus(threadIndexes) == S)
                         numThreads++;
                 }(),...);
             }
@@ -64,14 +64,14 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Wait until lockable is owned
+         * @brief Wait until lockable is owned.
          * 
          * @tparam BasicLockable 
          * @param lockable 
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
-         * std:mutex m;
+         * std::mutex m;
          * sch.waitUntilLocked(&m);
          * \endcode
          */
@@ -84,52 +84,53 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.
+         * @brief Wait until at least one of the threadIndexes threads have thread_status_v equal to S and return the index of the first thread who reached S.
          * 
-         * @tparam S : The thread_status_t waitUntilOneThreadStatus will wait until
-         * @param threadIndixes : Indixes of the threads to perform waitUntilOneThreadStatus on
-         * @return size_t : the index of the first thread who reached thread_status_t S
+         * @tparam S : The thread_status_t waitUntilOneThreadStatus will wait until.
+         * @param threadIndexes : Indexes of the threads to perform waitUntilOneThreadStatus() on.
+         * @return size_t : the index of the first thread who reached thread_status_t S.
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
          * auto index = sch.waitUntilOneThreadStatus<thread_status_t::WAITING>(0,1,2,3);
          * \endcode
          */
         template<thread_status_t S, typename... Args>
-        size_t waitUntilOneThreadStatus(Args&&... threadIndixes){
+        size_t waitUntilOneThreadStatus(Args&&... threadIndexes){
             size_t threadIndex = -1;
             for (;threadIndex == -1;){
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
                 ([&]{
-                    if (getThreadStatus(threadIndixes) == S)
-                        threadIndex = threadIndixes;
+                    if (getThreadStatus(threadIndexes) == S)
+                        threadIndex = threadIndexes;
                 }(),...);
             }
             return threadIndex;
         }
 
         /**
-         * @brief Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all threads switchContext back.
+         * @brief Switch context allowing the threads with threadIndexes to proceed while stopping the scheduler from executing until all threads switchContext back.
          * 
-         * @param threadIndixes : Indixes of the threads to perform switchContextTo on
+         * @param threadIndexes : Indexes of the threads to perform switchContextTo() on.
          * 
-         * example of switchContextTo:
+         * #### Example:
+         * example of switchContextTo():
          * \code{.cpp}
          * sch.switchContextTo(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
-        void switchContextTo(Args&&... threadIndixes){
+        void switchContextTo(Args&&... threadIndexes){
             ([&]{
-                proceed(threadIndixes);
-                wait(threadIndixes);
+                proceed(threadIndexes);
+                wait(threadIndexes);
             }(),...);
         }
 
         /**
          * @brief Switch context allowing all the threads to proceed while stopping the scheduler from executing until all of the threads switchContext back.
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
          * sch.switchContextAll();
          * \endcode
@@ -139,25 +140,25 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Perform a join on the threads with threadIndixes.
+         * @brief Perform a join on the threads with threadIndexes.
          * 
-         * @param threadIndixes : Indixes of the threads to perform joinOn on
+         * @param threadIndexes : Indexes of the threads to perform joinOn on.
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
          * sch.joinOn(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
-        void joinOn(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].join(), ...);
+        void joinOn(Args&&... threadIndexes){
+            static_assert(sizeof...(threadIndexes) <= N, "Too many args");
+            (_threads[threadIndexes].join(), ...);
         }
 
         /**
          * @brief Perform a join on all threads.
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
          * sch.joinAll();
          * \endcode
@@ -168,41 +169,41 @@ namespace DeterministicConcurrency{
         }
 
         /**
-         * @brief Allow threadIndixes to continue while not stopping the scheduler thread.
+         * @brief Allow threadIndexes to continue while not stopping the scheduler thread.
          * 
-         * @param threadIndixes : Indixes of the threads to perform proceed on
+         * @param threadIndexes : Indexes of the threads to perform proceed on.
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
          * sch.proceed(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
-        void proceed(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].tick(), ...);
+        void proceed(Args&&... threadIndexes){
+            static_assert(sizeof...(threadIndexes) <= N, "Too many args");
+            (_threads[threadIndexes].tick(), ...);
         }
 
         /**
-         * @brief Wait until the threads with threadIndixes go into WAITING status.
+         * @brief Wait until the threads with threadIndexes go into WAITING status.
          * 
-         * @param threadIndixes : Indixes of the threads to perform wait on
+         * @param threadIndexes : Indexes of the threads to perform wait on.
          * 
-         * example:
+         * #### Example:
          * \code{.cpp}
          * sch.wait(0, 1, 2, 3);
          * \endcode
          */
         template<typename... Args>
-        void wait(Args&&... threadIndixes){
-            static_assert(sizeof...(threadIndixes) <= N, "Too many args");
-            (_threads[threadIndixes].wait_for_tock(), ...);
+        void wait(Args&&... threadIndexes){
+            static_assert(sizeof...(threadIndexes) <= N, "Too many args");
+            (_threads[threadIndexes].wait_for_tock(), ...);
         }
 
         /**
          * @brief Get the Thread Status of the thread with threadIndex.
          * 
-         * @param threadIndex Obtain the thread_status of the thread identified by threadIndex.
+         * @param threadIndex : Obtain the thread_status of the thread identified by threadIndex.
          * @return thread_status_t : the status of the threadIndex-th thread.
          */
         thread_status_t getThreadStatus(size_t threadIndex){
@@ -235,11 +236,12 @@ namespace DeterministicConcurrency{
     };
 
     /**
-     * @brief Helper function to create an UserControlledScheduler
+     * @brief Helper function to create an UserControlledScheduler.
      * 
      * @param tuples : tuples containing the function the threads have to performs followed by their arguments.
-     * @return UserControlledScheduler 
+     * @return UserControlledScheduler.
      * 
+     * #### Example:
      * example of `make_UserControlledScheduler()`:
      * \code{.cpp}
      * void f(thread_context* c, int a){}

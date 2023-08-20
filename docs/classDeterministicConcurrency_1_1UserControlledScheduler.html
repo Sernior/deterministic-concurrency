@@ -93,68 +93,66 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classDeterministicConcurrency_1_1UserControlledScheduler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">DeterministicConcurrency::UserControlledScheduler&lt; N &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>#TODO  
+<p>A scheduler which allow to manage the flow of its managed threads.  
  <a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="UserControlledScheduler_8h_source.html">UserControlledScheduler.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a424273768e35799c5d7397454c4b14d0" id="r_a424273768e35799c5d7397454c4b14d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a424273768e35799c5d7397454c4b14d0">getThreadStatus</a> (size_t threadIndixes)</td></tr>
-<tr class="memdesc:a424273768e35799c5d7397454c4b14d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Thread Status object. #TODO.  <br /></td></tr>
-<tr class="separator:a424273768e35799c5d7397454c4b14d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88523996ed3f1365140bb35534745b29" id="r_a88523996ed3f1365140bb35534745b29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a88523996ed3f1365140bb35534745b29">getThreadStatus</a> (size_t threadIndex)</td></tr>
+<tr class="memdesc:a88523996ed3f1365140bb35534745b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Thread Status of the thread with threadIndex.  <br /></td></tr>
+<tr class="separator:a88523996ed3f1365140bb35534745b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62ac43447104509cec55015b64db7115" id="r_a62ac43447104509cec55015b64db7115"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a62ac43447104509cec55015b64db7115">joinAll</a> ()</td></tr>
 <tr class="memdesc:a62ac43447104509cec55015b64db7115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a join on all threads.  <br /></td></tr>
 <tr class="separator:a62ac43447104509cec55015b64db7115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbddea358e9ece84cefbf383ed59bb2e" id="r_abbddea358e9ece84cefbf383ed59bb2e"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:abbddea358e9ece84cefbf383ed59bb2e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#abbddea358e9ece84cefbf383ed59bb2e">joinOn</a> (Args &amp;&amp;... threadIndixes)</td></tr>
-<tr class="memdesc:abbddea358e9ece84cefbf383ed59bb2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a join on the threads with threadIndixes.#TODO.  <br /></td></tr>
-<tr class="separator:abbddea358e9ece84cefbf383ed59bb2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac75eea6ae663e8aa16b9b3c48b00490f" id="r_ac75eea6ae663e8aa16b9b3c48b00490f"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:ac75eea6ae663e8aa16b9b3c48b00490f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac75eea6ae663e8aa16b9b3c48b00490f">proceed</a> (Args &amp;&amp;... threadIndixes)</td></tr>
-<tr class="memdesc:ac75eea6ae663e8aa16b9b3c48b00490f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tick threadIndixes threads, allowing them to continue if they were in WAITING status.#TODO.  <br /></td></tr>
-<tr class="separator:ac75eea6ae663e8aa16b9b3c48b00490f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1633deac1bb4704bb00d1324afe02393" id="r_a1633deac1bb4704bb00d1324afe02393"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a1633deac1bb4704bb00d1324afe02393"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a1633deac1bb4704bb00d1324afe02393">joinOn</a> (Args &amp;&amp;... threadIndexes)</td></tr>
+<tr class="memdesc:a1633deac1bb4704bb00d1324afe02393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a join on the threads with threadIndexes.  <br /></td></tr>
+<tr class="separator:a1633deac1bb4704bb00d1324afe02393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38aad08c72765b36b090171e7bba8539" id="r_a38aad08c72765b36b090171e7bba8539"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a38aad08c72765b36b090171e7bba8539"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a38aad08c72765b36b090171e7bba8539">proceed</a> (Args &amp;&amp;... threadIndexes)</td></tr>
+<tr class="memdesc:a38aad08c72765b36b090171e7bba8539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allow threadIndexes to continue while not stopping the scheduler thread.  <br /></td></tr>
+<tr class="separator:a38aad08c72765b36b090171e7bba8539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3af28a8f67bb8f418c12741f7e6e8116" id="r_a3af28a8f67bb8f418c12741f7e6e8116"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a3af28a8f67bb8f418c12741f7e6e8116">switchContextAll</a> ()</td></tr>
-<tr class="memdesc:a3af28a8f67bb8f418c12741f7e6e8116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back.#TODO.  <br /></td></tr>
+<tr class="memdesc:a3af28a8f67bb8f418c12741f7e6e8116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch context allowing all the threads to proceed while stopping the scheduler from executing until all of the threads switchContext back.  <br /></td></tr>
 <tr class="separator:a3af28a8f67bb8f418c12741f7e6e8116"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44513a71262668eb3b068e2c8f7a9b05" id="r_a44513a71262668eb3b068e2c8f7a9b05"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a44513a71262668eb3b068e2c8f7a9b05"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05">switchContextTo</a> (Args &amp;&amp;... threadIndixes)</td></tr>
-<tr class="memdesc:a44513a71262668eb3b068e2c8f7a9b05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back.#TODO.  <br /></td></tr>
-<tr class="separator:a44513a71262668eb3b068e2c8f7a9b05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac145c86ecfda1d2fc4785568ee1fc50f" id="r_ac145c86ecfda1d2fc4785568ee1fc50f"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:ac145c86ecfda1d2fc4785568ee1fc50f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#ac145c86ecfda1d2fc4785568ee1fc50f">wait</a> (Args &amp;&amp;... threadIndixes)</td></tr>
-<tr class="memdesc:ac145c86ecfda1d2fc4785568ee1fc50f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the threads with threadIndixes go into WAITING status.#TODO.  <br /></td></tr>
-<tr class="separator:ac145c86ecfda1d2fc4785568ee1fc50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ade605e91b79c39522d71b25cc34b9d" id="r_a5ade605e91b79c39522d71b25cc34b9d"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, typename... Args&gt; </td></tr>
-<tr class="memitem:a5ade605e91b79c39522d71b25cc34b9d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5ade605e91b79c39522d71b25cc34b9d">waitUntilAllThreadStatus</a> (Args &amp;&amp;... threadIndixes)</td></tr>
-<tr class="memdesc:a5ade605e91b79c39522d71b25cc34b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the resolution for S == WAITING_EXTERNAL.#TODO.  <br /></td></tr>
-<tr class="separator:a5ade605e91b79c39522d71b25cc34b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28c0ba34dd04660c0102f0028edcbd70" id="r_a28c0ba34dd04660c0102f0028edcbd70"><td class="memTemplParams" colspan="2">template&lt;typename BasicLockable &gt; </td></tr>
-<tr class="memitem:a28c0ba34dd04660c0102f0028edcbd70"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a28c0ba34dd04660c0102f0028edcbd70">waitUntilLocked</a> (BasicLockable *lockable)</td></tr>
-<tr class="memdesc:a28c0ba34dd04660c0102f0028edcbd70"><td class="mdescLeft">&#160;</td><td class="mdescRight">#TODO  <br /></td></tr>
-<tr class="separator:a28c0ba34dd04660c0102f0028edcbd70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7a3cedbcde50acac05edc549a050ff" id="r_a5a7a3cedbcde50acac05edc549a050ff"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, typename... Args&gt; </td></tr>
-<tr class="memitem:a5a7a3cedbcde50acac05edc549a050ff"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a5a7a3cedbcde50acac05edc549a050ff">waitUntilOneThreadStatus</a> (Args &amp;&amp;... threadIndixes)</td></tr>
-<tr class="memdesc:a5a7a3cedbcde50acac05edc549a050ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.#TODO.  <br /></td></tr>
-<tr class="separator:a5a7a3cedbcde50acac05edc549a050ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc3d3ca561e743bb9051f758ac1dd0c4" id="r_acc3d3ca561e743bb9051f758ac1dd0c4"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:acc3d3ca561e743bb9051f758ac1dd0c4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acc3d3ca561e743bb9051f758ac1dd0c4">switchContextTo</a> (Args &amp;&amp;... threadIndexes)</td></tr>
+<tr class="memdesc:acc3d3ca561e743bb9051f758ac1dd0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch context allowing the threads with threadIndexes to proceed while stopping the scheduler from executing until all threads switchContext back.  <br /></td></tr>
+<tr class="separator:acc3d3ca561e743bb9051f758ac1dd0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a515cb6f198d67d9175cfcf7c748fc997" id="r_a515cb6f198d67d9175cfcf7c748fc997"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a515cb6f198d67d9175cfcf7c748fc997"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a515cb6f198d67d9175cfcf7c748fc997">wait</a> (Args &amp;&amp;... threadIndexes)</td></tr>
+<tr class="memdesc:a515cb6f198d67d9175cfcf7c748fc997"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the threads with threadIndexes go into WAITING status.  <br /></td></tr>
+<tr class="separator:a515cb6f198d67d9175cfcf7c748fc997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf9c8f15e794b319a53ea91507b9a2e1" id="r_acf9c8f15e794b319a53ea91507b9a2e1"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, typename... Args&gt; </td></tr>
+<tr class="memitem:acf9c8f15e794b319a53ea91507b9a2e1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acf9c8f15e794b319a53ea91507b9a2e1">waitUntilAllThreadStatus</a> (Args &amp;&amp;... threadIndexes)</td></tr>
+<tr class="memdesc:acf9c8f15e794b319a53ea91507b9a2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until all of the threadIndexes threads have thread_status_v equal to S.  <br /></td></tr>
+<tr class="separator:acf9c8f15e794b319a53ea91507b9a2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c8ada3df680dfce3c15bef6a161064" id="r_a68c8ada3df680dfce3c15bef6a161064"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> S, typename... Args&gt; </td></tr>
+<tr class="memitem:a68c8ada3df680dfce3c15bef6a161064"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a68c8ada3df680dfce3c15bef6a161064">waitUntilOneThreadStatus</a> (Args &amp;&amp;... threadIndexes)</td></tr>
+<tr class="memdesc:a68c8ada3df680dfce3c15bef6a161064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until at least one of the threadIndexes threads have thread_status_v equal to S and return the index of the first thread who reached S.  <br /></td></tr>
+<tr class="separator:a68c8ada3df680dfce3c15bef6a161064"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a939add603d089b7144a30dec1db017d6" id="r_a939add603d089b7144a30dec1db017d6"><td class="memTemplParams" colspan="2">template&lt;typename BasicLockable &gt; </td></tr>
+<tr class="memitem:a939add603d089b7144a30dec1db017d6"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a939add603d089b7144a30dec1db017d6">waitUntilLocked</a> (BasicLockable *lockable)</td></tr>
+<tr class="memdesc:a939add603d089b7144a30dec1db017d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until lockable is owned.  <br /></td></tr>
+<tr class="separator:a939add603d089b7144a30dec1db017d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;size_t N&gt;<br />
-class DeterministicConcurrency::UserControlledScheduler&lt; N &gt;</div><p>#TODO </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">N</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+class DeterministicConcurrency::UserControlledScheduler&lt; N &gt;</div><p>A scheduler which allow to manage the flow of its managed threads. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a424273768e35799c5d7397454c4b14d0" name="a424273768e35799c5d7397454c4b14d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a424273768e35799c5d7397454c4b14d0">&#9670;&#160;</a></span>getThreadStatus()</h2>
+<a id="a88523996ed3f1365140bb35534745b29" name="a88523996ed3f1365140bb35534745b29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88523996ed3f1365140bb35534745b29">&#9670;&#160;</a></span>getThreadStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +166,7 @@ template&lt;size_t N&gt; </div>
           <td class="memname"><a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f492f6a5ccafda8e">thread_status_t</a> <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::getThreadStatus </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndex</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -179,20 +177,15 @@ template&lt;size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the Thread Status object. #TODO. </p>
+<p>Get the Thread Status of the thread with threadIndex. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td></td></tr>
+    <tr><td class="paramname">threadIndex</td><td>: Obtain the thread_status of the thread identified by threadIndex. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>thread_status_t</dd></dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
-</div><!-- fragment --> 
+<dl class="section return"><dt>Returns</dt><dd>thread_status_t : the status of the threadIndex-th thread. </dd></dl>
+
 </div>
 </div>
 <a id="a62ac43447104509cec55015b64db7115" name="a62ac43447104509cec55015b64db7115"></a>
@@ -221,16 +214,14 @@ template&lt;size_t N&gt; </div>
 </div><div class="memdoc">
 
 <p>Perform a join on all threads. </p>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<h4><a class="anchor" id="autotoc_md12"></a>
+Example:</h4>
+<div class="fragment"><div class="line">sch.joinAll();</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="abbddea358e9ece84cefbf383ed59bb2e" name="abbddea358e9ece84cefbf383ed59bb2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbddea358e9ece84cefbf383ed59bb2e">&#9670;&#160;</a></span>joinOn()</h2>
+<a id="a1633deac1bb4704bb00d1324afe02393" name="a1633deac1bb4704bb00d1324afe02393"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1633deac1bb4704bb00d1324afe02393">&#9670;&#160;</a></span>joinOn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,7 +237,7 @@ template&lt;typename... Args&gt; </div>
           <td class="memname">void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::joinOn </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndexes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -257,29 +248,21 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Perform a join on the threads with threadIndixes.#TODO. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Args</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Perform a join on the threads with threadIndexes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td></td></tr>
+    <tr><td class="paramname">threadIndexes</td><td>: Indexes of the threads to perform joinOn on.</td></tr>
   </table>
   </dd>
 </dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<h4><a class="anchor" id="autotoc_md11"></a>
+Example:</h4>
+<div class="fragment"><div class="line">sch.joinOn(0, 1, 2, 3);</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="ac75eea6ae663e8aa16b9b3c48b00490f" name="ac75eea6ae663e8aa16b9b3c48b00490f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac75eea6ae663e8aa16b9b3c48b00490f">&#9670;&#160;</a></span>proceed()</h2>
+<a id="a38aad08c72765b36b090171e7bba8539" name="a38aad08c72765b36b090171e7bba8539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38aad08c72765b36b090171e7bba8539">&#9670;&#160;</a></span>proceed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -295,7 +278,7 @@ template&lt;typename... Args&gt; </div>
           <td class="memname">void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::proceed </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndexes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -306,24 +289,16 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Tick threadIndixes threads, allowing them to continue if they were in WAITING status.#TODO. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Args</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Allow threadIndexes to continue while not stopping the scheduler thread. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td></td></tr>
+    <tr><td class="paramname">threadIndexes</td><td>: Indexes of the threads to perform proceed on.</td></tr>
   </table>
   </dd>
 </dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<h4><a class="anchor" id="autotoc_md13"></a>
+Example:</h4>
+<div class="fragment"><div class="line">sch.proceed(0, 1, 2, 3);</div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -352,17 +327,15 @@ template&lt;size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Switch context allowing all the threads to proceed while stopping the scheduler from executing while all of them switchContext back.#TODO. </p>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<p>Switch context allowing all the threads to proceed while stopping the scheduler from executing until all of the threads switchContext back. </p>
+<h4><a class="anchor" id="autotoc_md10"></a>
+Example:</h4>
+<div class="fragment"><div class="line">sch.switchContextAll();</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="a44513a71262668eb3b068e2c8f7a9b05" name="a44513a71262668eb3b068e2c8f7a9b05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44513a71262668eb3b068e2c8f7a9b05">&#9670;&#160;</a></span>switchContextTo()</h2>
+<a id="acc3d3ca561e743bb9051f758ac1dd0c4" name="acc3d3ca561e743bb9051f758ac1dd0c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3d3ca561e743bb9051f758ac1dd0c4">&#9670;&#160;</a></span>switchContextTo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +351,7 @@ template&lt;typename... Args&gt; </div>
           <td class="memname">void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::switchContextTo </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndexes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -389,31 +362,21 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from executing until all of them switchContext back.#TODO. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Args</td><td>: describe Args </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Switch context allowing the threads with threadIndexes to proceed while stopping the scheduler from executing until all threads switchContext back. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td>: describe threadIndixes</td></tr>
+    <tr><td class="paramname">threadIndexes</td><td>: Indexes of the threads to perform <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acc3d3ca561e743bb9051f758ac1dd0c4" title="Switch context allowing the threads with threadIndexes to proceed while stopping the scheduler from e...">switchContextTo()</a> on.</td></tr>
   </table>
   </dd>
 </dl>
-<p>example of switchContextTo: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a> ) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    sch.<a class="code hl_function" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05">switchContextTo</a>();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a></div><div class="ttdoc">#TODO</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:30</div></div>
-<div class="ttc" id="aclassDeterministicConcurrency_1_1UserControlledScheduler_html_a44513a71262668eb3b068e2c8f7a9b05"><div class="ttname"><a href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a44513a71262668eb3b068e2c8f7a9b05">DeterministicConcurrency::UserControlledScheduler::switchContextTo</a></div><div class="ttdeci">void switchContextTo(Args &amp;&amp;... threadIndixes)</div><div class="ttdoc">Switch context allowing the threads with threadIndixes to proceed while stopping the scheduler from e...</div><div class="ttdef"><b>Definition</b> UserControlledScheduler.h:140</div></div>
+<h4><a class="anchor" id="autotoc_md9"></a>
+Example:</h4>
+<p>example of <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acc3d3ca561e743bb9051f758ac1dd0c4" title="Switch context allowing the threads with threadIndexes to proceed while stopping the scheduler from e...">switchContextTo()</a>: </p><div class="fragment"><div class="line">sch.switchContextTo(0, 1, 2, 3);</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="ac145c86ecfda1d2fc4785568ee1fc50f" name="ac145c86ecfda1d2fc4785568ee1fc50f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac145c86ecfda1d2fc4785568ee1fc50f">&#9670;&#160;</a></span>wait()</h2>
+<a id="a515cb6f198d67d9175cfcf7c748fc997" name="a515cb6f198d67d9175cfcf7c748fc997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515cb6f198d67d9175cfcf7c748fc997">&#9670;&#160;</a></span>wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,7 +392,7 @@ template&lt;typename... Args&gt; </div>
           <td class="memname">void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::wait </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndexes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -440,29 +403,21 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Wait until the threads with threadIndixes go into WAITING status.#TODO. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Args</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Wait until the threads with threadIndexes go into WAITING status. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td></td></tr>
+    <tr><td class="paramname">threadIndexes</td><td>: Indexes of the threads to perform wait on.</td></tr>
   </table>
   </dd>
 </dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<h4><a class="anchor" id="autotoc_md14"></a>
+Example:</h4>
+<div class="fragment"><div class="line">sch.wait(0, 1, 2, 3);</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="a5ade605e91b79c39522d71b25cc34b9d" name="a5ade605e91b79c39522d71b25cc34b9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ade605e91b79c39522d71b25cc34b9d">&#9670;&#160;</a></span>waitUntilAllThreadStatus()</h2>
+<a id="acf9c8f15e794b319a53ea91507b9a2e1" name="acf9c8f15e794b319a53ea91507b9a2e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf9c8f15e794b319a53ea91507b9a2e1">&#9670;&#160;</a></span>waitUntilAllThreadStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -478,7 +433,7 @@ template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f49
           <td class="memname">void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::waitUntilAllThreadStatus </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndexes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -489,30 +444,27 @@ template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f49
 </table>
 </div><div class="memdoc">
 
-<p>Wait until all of the threadIndixes threads have thread_status_v equal to S // we must disable the resolution for S == WAITING_EXTERNAL.#TODO. </p>
+<p>Wait until all of the threadIndexes threads have thread_status_v equal to S. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">S</td><td></td></tr>
-    <tr><td class="paramname">Args</td><td></td></tr>
+    <tr><td class="paramname">S</td><td>: thread_status_t to wait until. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td>param</td></tr>
+    <tr><td class="paramname">threadIndexes</td><td>: Indexes of the threads to perform <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#acf9c8f15e794b319a53ea91507b9a2e1" title="Wait until all of the threadIndexes threads have thread_status_v equal to S.">waitUntilAllThreadStatus()</a> on.</td></tr>
   </table>
   </dd>
 </dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<h4><a class="anchor" id="autotoc_md6"></a>
+Example:</h4>
+<p>Wait until threads 0, 1, 2 and 3 reach status WAITING: </p><div class="fragment"><div class="line">sch.waitUntilAllThreadStatus&lt;thread_status_t::WAITING&gt;(0,1,2,3);</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="a28c0ba34dd04660c0102f0028edcbd70" name="a28c0ba34dd04660c0102f0028edcbd70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28c0ba34dd04660c0102f0028edcbd70">&#9670;&#160;</a></span>waitUntilLocked()</h2>
+<a id="a939add603d089b7144a30dec1db017d6" name="a939add603d089b7144a30dec1db017d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a939add603d089b7144a30dec1db017d6">&#9670;&#160;</a></span>waitUntilLocked()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -525,7 +477,7 @@ template&lt;typename BasicLockable &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::waitUntilLocked </td>
+          <td class="memname">static void <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::waitUntilLocked </td>
           <td>(</td>
           <td class="paramtype">BasicLockable *&#160;</td>
           <td class="paramname"><em>lockable</em></td><td>)</td>
@@ -534,12 +486,12 @@ template&lt;typename BasicLockable &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>#TODO </p>
+<p>Wait until lockable is owned. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">BasicLockable</td><td></td></tr>
@@ -552,16 +504,15 @@ template&lt;typename BasicLockable &gt; </div>
   </table>
   </dd>
 </dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<h4><a class="anchor" id="autotoc_md7"></a>
+Example:</h4>
+<div class="fragment"><div class="line">std::mutex m;</div>
+<div class="line">sch.waitUntilLocked(&amp;m);</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="a5a7a3cedbcde50acac05edc549a050ff" name="a5a7a3cedbcde50acac05edc549a050ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a7a3cedbcde50acac05edc549a050ff">&#9670;&#160;</a></span>waitUntilOneThreadStatus()</h2>
+<a id="a68c8ada3df680dfce3c15bef6a161064" name="a68c8ada3df680dfce3c15bef6a161064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c8ada3df680dfce3c15bef6a161064">&#9670;&#160;</a></span>waitUntilOneThreadStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -577,7 +528,7 @@ template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f49
           <td class="memname">size_t <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html">DeterministicConcurrency::UserControlledScheduler</a>&lt; N &gt;::waitUntilOneThreadStatus </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>threadIndixes</em></td><td>)</td>
+          <td class="paramname"><em>threadIndexes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -588,26 +539,23 @@ template&lt;<a class="el" href="DeterministicThread_8h.html#a1a2724fbacd89267f49
 </table>
 </div><div class="memdoc">
 
-<p>Wait until at least one of the threadIndixes threads have thread_status_v equal to S and return the index of the first thread who reached S.#TODO. </p>
+<p>Wait until at least one of the threadIndexes threads have thread_status_v equal to S and return the index of the first thread who reached S. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">S</td><td></td></tr>
-    <tr><td class="paramname">Args</td><td></td></tr>
+    <tr><td class="paramname">S</td><td>: The thread_status_t waitUntilOneThreadStatus will wait until. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">threadIndixes</td><td></td></tr>
+    <tr><td class="paramname">threadIndexes</td><td>: Indexes of the threads to perform <a class="el" href="classDeterministicConcurrency_1_1UserControlledScheduler.html#a68c8ada3df680dfce3c15bef6a161064" title="Wait until at least one of the threadIndexes threads have thread_status_v equal to S and return the i...">waitUntilOneThreadStatus()</a> on. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>size_t</dd></dl>
-<p>example: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function(my_namespace::my_class my_instance) {</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">    my_instance.my_method();</div>
-<div class="line">    <span class="comment">//...do something</span></div>
-<div class="line">};</div>
+<dl class="section return"><dt>Returns</dt><dd>size_t : the index of the first thread who reached thread_status_t S.</dd></dl>
+<h4><a class="anchor" id="autotoc_md8"></a>
+Example:</h4>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> index = sch.waitUntilOneThreadStatus&lt;thread_status_t::WAITING&gt;(0,1,2,3);</div>
 </div><!-- fragment --> 
 </div>
 </div>
