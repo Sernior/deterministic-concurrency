@@ -8,12 +8,12 @@
 
 <div align="center">
   <p align="center">
-    A simple C++ lib for testing syncronization mechanisms.
+    <em>A simple C++ lib for testing syncronization mechanisms.</em>
   </p>
 </div>
 
 
-<details>
+<!-- <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -32,7 +32,7 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Authors</a></li>
   </ol>
-</details>
+</details> -->
 
 ## About The Project
 
@@ -40,8 +40,8 @@ Concurrency testing often poses challenges due to the `non-deterministic` nature
 While primarily designed for testing, the `UserControlledScheduler` can also serve as a framework to create synchronized thread pool-like structures for broader multithread applications.
 
 The assumptions are:
-  - when you go to create a `UserControlledScheduler`, you will need to use it.
-  - when you go to create `threads` (which will be managed by the `UserControlledScheduler`), the threads will have to start and finish their processing before the `UserControlledScheduler` is destroyed.
+  - `UserControlledScheduler` automatically creates a number of `std::threads` equal to the number of arguments you pass its constructor; these `threads` are lazy and each one of them must be allowed to terminate by the `UserControlledScheduler`. 
+  - To allow a `thread` to finish, the `UserControlledScheduler` must allow these `threads` to proceed until they are in a `joinable` state.
 
 ## Getting Started
 ### Prerequisites
@@ -129,23 +129,20 @@ I'm writing 3!
 
 If you encounter any issues or would like to suggest new features, please don't hesitate to open an issue or get in touch with me at federignoli@hotmail.it.<br />Contributions are also welcome! Feel free to open pull requests to the main repository and assign me as a reviewer – I'll be sure to review them. Your help is greatly appreciated!
 
-
-
 ## License
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
-
+## Documentation
+The documentation is available at the following link: https://sernior.github.io/deterministic-concurrency/
 
 ## Contacts
 
 Federico Abrignani - federignoli@hotmail.it
 
-
-
 ## Authors and Contributors
 
-* Federico Abrignani (Author)
-* Paolo Di Giglio (Contributor)
-* Salvatore Martorana (Contributor)
+* Federico Abrignani (Author) - https://github.com/Sernior
+* Paolo Di Giglio (Contributor) - https://github.com/pdigiglio
+* Salvatore Martorana (Contributor) - https://github.com/SMartorana
 
