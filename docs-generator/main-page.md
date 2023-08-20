@@ -128,5 +128,5 @@ Hello!
 My name is Bob.
 ```
 and we successfully controlled the flow of our threads.<br>
-It is worth noting that on "external sources of waiting" we can`t just directly call ```m.lock()``` or ```m.lock_shared()``` so I had to implement ```lock``` and ```lock_shared``` as thread_context methods.
+It is worth noting that on "external sources of waiting" we can't just directly call ```m.lock()``` or ```m.lock_shared()``` so I had to implement ```lock``` and ```lock_shared``` as thread_context methods.
 This is because thread contextes need to know that they could remain stuck on a lock and thus update the thread status to WAITING_EXTERNAL.

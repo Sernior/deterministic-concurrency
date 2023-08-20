@@ -201,7 +201,7 @@ UserControlledScheduler</h1>
 </div><!-- fragment --><p>We will end up printing </p><div class="fragment"><div class="line">Hello!</div>
 <div class="line">My name is Bob.</div>
 </div><!-- fragment --><p> and we successfully controlled the flow of our threads.<br  />
- It is worth noting that on "external sources of waiting" we can<code>t just directly call</code><code>m.lock()</code><code>or</code><code>m.lock_shared()</code><code>so I had to implement</code><code>lock</code><code>and</code><code>lock_shared</code>` as thread_context methods. This is because thread contextes need to know that they could remain stuck on a lock and thus update the thread status to WAITING_EXTERNAL. </p>
+ It is worth noting that on "external sources of waiting" we can't just directly call <code>m.lock()</code> or <code>m.lock_shared()</code> so I had to implement <code>lock</code> and <code>lock_shared</code> as thread_context methods. This is because thread contextes need to know that they could remain stuck on a lock and thus update the thread status to WAITING_EXTERNAL. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.3-->
