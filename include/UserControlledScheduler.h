@@ -3,7 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
- * @brief 
+ * @brief Contains the definition of the UserControlledScheduler
  * @version 1.4.5
  * @date 2023-08-14
  * 

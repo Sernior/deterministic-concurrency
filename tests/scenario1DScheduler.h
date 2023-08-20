@@ -1,4 +1,4 @@
-#include <UserControlledScheduler.h>
+#include <DeterministicConcurrency>
 #include <vector>
 
 namespace scenario1DS{

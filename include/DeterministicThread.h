@@ -3,7 +3,7 @@
  * @author F. Abrignani (federignoli@hotmail.it)
  * @author P. Di Giglio
  * @author S. Martorana
- * @brief 
+ * @brief Contains the definition of DeterministicThread and thread_context
  * @version 1.4.5
  * @date 2023-08-14
  * 
@@ -19,7 +19,7 @@
 
 namespace DeterministicConcurrency{
     /**
-     * @brief describe the thread status#TODO
+     * @brief Enum describing the possible states of a thread
      * 
      */
     enum class thread_status_t{
@@ -216,7 +216,6 @@ namespace DeterministicConcurrency{
 
     /**
      * @brief A thread controlled by the UserControlledScheduler
-     * 
      */
     class DeterministicThread {
     public:
@@ -231,7 +230,7 @@ namespace DeterministicConcurrency{
             , _this_thread(t) {}
 
         /**
-         * @brief Join this this thread
+         * @brief Join this thread
          */
         void join() {
             _thread.join();
