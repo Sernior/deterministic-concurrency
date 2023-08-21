@@ -107,7 +107,8 @@ This scheduler is controlling <span style="color: darkgoldenrod;">2 determistic 
 ```
 
 This will allow ```thread0``` to proceed and stop the scheduler until thread0 uses switch context on its ```thread_context``` or until it finishes. So ```thread0``` will start executing perform <span style="color: darkgoldenrod;">#0</span> taking the lock on m at <span style="color: darkgoldenrod;">#1</span> and then execute <span style="color: darkgoldenrod;">#2</span> stopping itself and giving control back to the scheduler.<br>
-At this point assuming m function similarly to a ```std::mutex```, so not allowing also ```thread0``` to go past the lock if we were to perform ```sch.switchContextTo(1)``` we would surely deadlock ourselves. So insted we can use ```proceed()``` which allows threads to proceed but without stopping the scheduler thread.
+
+At this point assuming ```m``` function similarly to a ```std::mutex```, it will not allow ```thread1``` to go past the lock; if we were to perform ```sch.switchContextTo(1)``` we would surely deadlock ourselves. So, instead, we can use ```proceed()``` which allows threads to proceed but without stopping the scheduler thread.
 
 ```cpp
     sch.proceed(1);
