@@ -80,14 +80,19 @@ thread_function1 (DeterministicConcurrency::thread_context* c) {
 int main(){
     auto thread0 = std::tuple{&thread_function0};
     auto thread1 = std::tuple{&thread_function1};
+
     auto sch = make_UserControlledScheduler(thread0, thread1);
+
     sch.switchContextTo(0);     // #1.1
     sch.proceed(1);
     sch.waitUntilAllThreadStatus<thread_status_t::WAITING_EXTERNAL>(1);
+
     sch.switchContextTo(0);     // #1.2
     sch.waitUntilAllThreadStatus<thread_status_t::WAITING>(1);
+
     sch.switchContextTo(1);
     sch.joinAll();
+    
     std::cout << "Bob.";
 }
 ```
