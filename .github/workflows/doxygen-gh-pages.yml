@@ -10,9 +10,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
+      - uses: actions/checkout@v3
+      - uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1)]
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: docs
-          config_file: config-file
+            doxygenconf: 'config-file'
+            htmloutput: './docs'
+            ghpagesbranch: 'gh-pages'
+            ghpagesdir: './'
+            darkmode: 'true'
+            customheader: 'empty'
