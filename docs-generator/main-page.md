@@ -89,7 +89,6 @@ int main(){
     sch.switchContextTo(1);
     sch.joinAll();
     std::cout << "Bob.";
-
 }
 ```
 
